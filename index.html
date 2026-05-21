@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garda Dan Comics</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5e7b8;
+      color: #10243a;
+    }
+    header {
+      background: linear-gradient(135deg, #042b52, #0b4f2f);
+      color: white;
+      padding: 28px 18px;
+      text-align: center;
+      border-bottom: 8px solid #f4c430;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      letter-spacing: 2px;
+      color: #f4c430;
+      text-shadow: 3px 3px #000;
+    }
+    header p {
+      margin: 10px auto 0;
+      max-width: 700px;
+      font-size: 1.15rem;
+    }
+    nav {
+      background: #061c2e;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 12px;
+      display: inline-block;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    .hero {
+      min-height: 420px;
+      background: radial-gradient(circle at center, rgba(255,255,255,.45), rgba(245,231,184,.8)), linear-gradient(135deg, #74c365, #1d83c1);
+      display: grid;
+      place-items: center;
+      padding: 30px 18px;
+      text-align: center;
+    }
+    .hero-card {
+      max-width: 900px;
+      background: rgba(255,255,255,.88);
+      border: 5px solid #10243a;
+      box-shadow: 10px 10px 0 #f4c430;
+      border-radius: 18px;
+      padding: 28px;
+    }
+    .hero h2 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      margin: 0 0 10px;
+      color: #0b4f2f;
+    }
+    .button {
+      display: inline-block;
+      background: #f4c430;
+      color: #10243a;
+      padding: 14px 22px;
+      border: 3px solid #10243a;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 15px;
+      box-shadow: 4px 4px 0 #10243a;
+    }
+    section {
+      padding: 45px 18px;
+      max-width: 1150px;
+      margin: auto;
+    }
+    h2.section-title {
+      font-size: 2.2rem;
+      margin: 0 0 24px;
+      border-bottom: 5px solid #f4c430;
+      display: inline-block;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border: 4px solid #10243a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 6px 6px 0 rgba(16,36,58,.25);
+    }
+    .placeholder {
+      height: 220px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #0b4f2f, #f4c430);
+      color: white;
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-shadow: 2px 2px #000;
+    }
+    .card-content { padding: 18px; }
+    .card h3 { margin-top: 0; font-size: 1.45rem; }
+    .tag {
+      display: inline-block;
+      background: #10243a;
+      color: white;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .8rem;
+      margin: 3px;
+    }
+    .notice {
+      background: #10243a;
+      color: white;
+      border-radius: 18px;
+      padding: 25px;
+      border: 5px solid #f4c430;
+      text-align: center;
+    }
+    footer {
+      background: #061c2e;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 35px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GARDA DAN</h1>
+    <p>Small town. Big personality. Same uniform. Welcome to the official home of Ballybrackan’s strangest comic adventures.</p>
+  </header>
+
+  <nav>
+    <a href="#comics">Comics</a>
+    <a href="#characters">Characters</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#season5">Season 5</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <h2>The Adventures of Garda Dan</h2>
+        <p>Explore the comic-book world of Ballybrackan: mysteries, seagulls, missing balls, traffic cones, strange lights, and one very suspicious Garda.</p>
+        <a class="button" href="#comics">Read the Comics</a>
+      </div>
+    </section>
+
+    <section id="comics">
+      <h2 class="section-title">Comic Series</h2>
+      <div class="grid">
+        <article class="card"><div class="placeholder">Season 1<br>Classic Chaos</div><div class="card-content"><h3>Season 1</h3><p>The bright yellow early days of Garda Dan and Ballybrackan madness.</p></div></article>
+        <article class="card"><div class="placeholder">Season 2<br>The Mystery Grows</div><div class="card-content"><h3>Season 2</h3><p>More characters, stranger clues, and the town getting properly weird.</p></div></article>
+        <article class="card"><div class="placeholder">Season 3<br>The Ballybrackan Incident</div><div class="card-content"><h3>Season 3</h3><p>The truth, the cover-up, the bonfire, the tunnels, and the thing nobody talks about.</p></div></article>
+        <article class="card"><div class="placeholder">Season 4<br>The Tide Files</div><div class="card-content"><h3>Season 4 — The Tide Files</h3><p>A darker coastal mystery with fog, harbour secrets, sea caves, and Garda Dan choosing truth.</p></div></article>
+        <article class="card"><div class="placeholder">Spin-Off<br>The Case of the Missing Balls</div><div class="card-content"><h3>The Case of the Missing Balls</h3><p>A comedy GAA spin-off where the team’s footballs vanish days before the county final.</p></div></article>
+      </div>
+    </section>
+
+    <section id="characters">
+      <h2 class="section-title">Characters</h2>
+      <div class="grid">
+        <article class="card"><div class="placeholder">Garda Dan</div><div class="card-content"><h3>Garda Dan</h3><p>Ballybrackan’s favourite Garda. Brave, confused, suspicious, and always in navy uniform.</p><span class="tag">Hero</span><span class="tag">Tea Powered</span></div></article>
+        <article class="card"><div class="placeholder">Gerard Downey</div><div class="card-content"><h3>Gerard Downey</h3><p>Accidental detective. Finds clues by being in the wrong place at the right time.</p><span class="tag">Spin-Off Star</span></div></article>
+        <article class="card"><div class="placeholder">Seamus Kelly</div><div class="card-content"><h3>Seamus “Shouty” Kelly</h3><p>GAA chairman. Loud, traditional, and somehow always angry even when winning.</p><span class="tag">Chairman</span></div></article>
+        <article class="card"><div class="placeholder">Marty Murphy</div><div class="card-content"><h3>Marty “The Tactician” Murphy</h3><p>Team manager with a tactics board, a whistle, and no patience for nonsense.</p><span class="tag">Manager</span></div></article>
+        <article class="card"><div class="placeholder">Paudie Can Man</div><div class="card-content"><h3>Paudie Can Man</h3><p>The man who knows something. Possibly. If he can remember it.</p><span class="tag">Suspicious</span></div></article>
+        <article class="card"><div class="placeholder">Captain Byrne</div><div class="card-content"><h3>Captain Byrne</h3><p>Old sea dog, storyteller, and probably right more often than anyone wants to admit.</p><span class="tag">Harbour Legend</span></div></article>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h2 class="section-title">Gallery</h2>
+      <div class="notice">
+        <h3>Comic Art Coming Soon</h3>
+        <p>Add your cover pages, episode pages, posters, maps and bonus pages here as image files.</p>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About Ballybrackan</h2>
+      <p>Ballybrackan is a small Irish town where every mystery starts with gossip, every clue leads to Doyle’s Pub, and every seagull is at least mildly suspicious.</p>
+      <p>It is home to Garda Dan, traffic cone incidents, strange harbour lights, GAA chaos, and more secrets than one town should reasonably have.</p>
+    </section>
+
+    <section id="season5">
+      <h2 class="section-title">Season 5 Coming Soon</h2>
+      <div class="notice">
+        <h3>The Town Got More Real</h3>
+        <p>Before Season 5 begins, readers will discover why Ballybrackan — and Garda Dan himself — started to look different as the truth came closer.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© Garda Dan Comics — Ballybrackan Forever ☘️</p>
+  </footer>
+</body>
+</html>
