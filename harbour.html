@@ -1,1 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ballybrackan Harbour</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #061c2e;
+      color: white;
+      overflow-x: hidden;
+    }
+    header {
+      background:
+        radial-gradient(circle at 70% 20%, rgba(244,196,48,.25), transparent 18%),
+        linear-gradient(135deg, #061c2e, #0a3c58, #0b4f2f);
+      text-align: center;
+      padding: 42px 18px;
+      border-bottom: 8px solid #f4c430;
+    }
+    header h1 {
+      margin: 0;
+      color: #f4c430;
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      text-shadow: 3px 3px #000;
+      letter-spacing: 2px;
+    }
+    header p {
+      max-width: 860px;
+      margin: 12px auto 0;
+      font-size: 1.15rem;
+    }
+    nav {
+      background: #020b12;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 12px;
+      display: inline-block;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    .ticker {
+      background: #10243a;
+      color: #f4c430;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 3px solid #f4c430;
+      border-bottom: 3px solid #f4c430;
+      font-weight: bold;
+    }
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 28s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 45px 18px;
+      position: relative;
+      z-index: 3;
+    }
+    .intro {
+      background: rgba(16,36,58,.92);
+      border: 5px solid #f4c430;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,.35);
+      margin-bottom: 35px;
+    }
+    .intro h2 { color: #f4c430; margin-top: 0; font-size: 2rem; }
+    .harbour-stage {
+      position: relative;
+      min-height: 680px;
+      border: 6px solid #f4c430;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 12px 12px 0 rgba(0,0,0,.35);
+      background:
+        radial-gradient(circle at 82% 18%, rgba(244,196,48,.45), transparent 8%),
+        linear-gradient(180deg, #071827 0%, #0a3c58 48%, #173b47 49%, #052231 100%);
+    }
+    .moon {
+      position: absolute;
+      top: 55px;
+      right: 110px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #f4c430;
+      box-shadow: 0 0 40px rgba(244,196,48,.75);
+    }
+    .water {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 42%;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.12) 0 2px, transparent 2px 16px),
+        linear-gradient(180deg, #0a4a66, #03131f);
+    }
+    .pier {
+      position: absolute;
+      left: 8%;
+      bottom: 35%;
+      width: 58%;
+      height: 60px;
+      background: #5a391f;
+      border: 4px solid #111;
+      transform: rotate(-4deg);
+      box-shadow: 8px 8px 0 rgba(0,0,0,.35);
+    }
+    .cliff {
+      position: absolute;
+      right: -5%;
+      bottom: 38%;
+      width: 38%;
+      height: 260px;
+      background: #1d331f;
+      border: 4px solid #111;
+      border-radius: 60% 0 0 0;
+    }
+    .lighthouse {
+      position: absolute;
+      right: 13%;
+      bottom: 52%;
+      width: 76px;
+      height: 190px;
+      background: repeating-linear-gradient(0deg, white 0 34px, #d4481c 34px 62px);
+      border: 4px solid #111;
+      border-radius: 14px 14px 0 0;
+      cursor: help;
+      z-index: 4;
+    }
+    .lighthouse::before {
+      content: "";
+      position: absolute;
+      top: -42px;
+      left: -10px;
+      width: 90px;
+      height: 44px;
+      background: #10243a;
+      border: 4px solid #111;
+      border-radius: 16px 16px 0 0;
+    }
+    .beam {
+      position: absolute;
+      top: 122px;
+      right: 17%;
+      width: 54%;
+      height: 150px;
+      background: linear-gradient(90deg, rgba(244,196,48,.38), transparent);
+      clip-path: polygon(100% 45%, 0 0, 0 100%);
+      transform-origin: right center;
+      animation: sweep 8s ease-in-out infinite;
+      opacity: .8;
+    }
+    @keyframes sweep {
+      0%,100% { transform: rotate(-8deg); opacity: .32; }
+      50% { transform: rotate(9deg); opacity: .75; }
+    }
+    .location {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: #10243a;
+      border: 4px solid #10243a;
+      border-radius: 16px;
+      padding: 10px 12px;
+      text-align: center;
+      min-width: 130px;
+      font-weight: bold;
+      box-shadow: 6px 6px 0 rgba(0,0,0,.35);
+      cursor: pointer;
+      z-index: 6;
+      transition: transform .2s ease;
+    }
+    .location:hover { transform: translate(-50%, -55%) scale(1.04); }
+    .location small { display: block; font-weight: normal; font-size: .78rem; margin-top: 4px; }
+    .old-pier { left: 33%; top: 60%; }
+    .tunnel { left: 48%; top: 72%; background: #f4c430; }
+    .caves { left: 82%; top: 70%; }
+    .pub { left: 20%; top: 38%; }
+    .signal { left: 62%; top: 35%; background: #7cff98; }
+    .stage-note {
+      position: absolute;
+      left: 22px;
+      top: 22px;
+      background: rgba(6,28,46,.9);
+      border: 3px solid #f4c430;
+      border-radius: 14px;
+      padding: 12px;
+      max-width: 280px;
+      color: white;
+      z-index: 8;
+    }
+    .section-title {
+      color: #f4c430;
+      font-size: 2.2rem;
+      border-bottom: 5px solid #f4c430;
+      display: inline-block;
+      margin: 45px 0 24px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+    .card {
+      background: #f5e7b8;
+      color: #10243a;
+      border: 5px solid #f4c430;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 7px 7px 0 rgba(0,0,0,.35);
+    }
+    .card h3 { margin-top: 0; font-size: 1.45rem; }
+    .tag {
+      display: inline-block;
+      background: #10243a;
+      color: white;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .8rem;
+      margin-bottom: 10px;
+    }
+    .logbook {
+      background: #020b12;
+      border: 5px solid #7cff98;
+      border-radius: 18px;
+      padding: 22px;
+      color: #7cff98;
+      font-family: 'Courier New', monospace;
+      box-shadow: 8px 8px 0 rgba(0,0,0,.35);
+    }
+    .logbook p { animation: flicker 3s infinite; }
+    @keyframes flicker { 0%,100%{opacity:1;} 45%{opacity:.5;} 48%{opacity:.9;} 70%{opacity:.35;} }
+    .harbour-alert {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      max-width: 380px;
+      background: #10243a;
+      color: #f4c430;
+      border: 4px solid #f4c430;
+      border-radius: 16px;
+      padding: 16px 18px;
+      font-weight: bold;
+      box-shadow: 8px 8px 0 rgba(0,0,0,.35);
+      z-index: 99;
+      opacity: 0;
+      transform: translateY(30px);
+      pointer-events: none;
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .harbour-alert.show { opacity: 1; transform: translateY(0); }
+    .fog-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .fog {
+      position: absolute;
+      width: 900px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(255,255,255,.18), rgba(255,255,255,0));
+      filter: blur(36px);
+      opacity: .45;
+      animation: driftFog linear infinite;
+    }
+    .fog-1 { top: 10%; left: -40%; animation-duration: 60s; }
+    .fog-2 { top: 46%; left: -50%; animation-duration: 86s; }
+    .fog-3 { top: 72%; left: -45%; animation-duration: 110s; }
+    @keyframes driftFog { from { transform: translateX(0); } to { transform: translateX(170vw); } }
+    footer {
+      background: #020b12;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 45px;
+    }
+    @media (max-width: 850px) {
+      nav { position: static; }
+      .harbour-stage { min-height: 800px; }
+      .location { min-width: 115px; font-size: .85rem; }
+      .moon { right: 40px; }
+      .lighthouse { right: 12%; }
+      .old-pier { left: 30%; top: 58%; }
+      .tunnel { left: 46%; top: 75%; }
+      .caves { left: 73%; top: 70%; }
+      .pub { left: 25%; top: 42%; }
+      .signal { left: 56%; top: 32%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="fog-container">
+    <div class="fog fog-1"></div>
+    <div class="fog fog-2"></div>
+    <div class="fog fog-3"></div>
+  </div>
+
+  <header>
+    <h1>BALLYBRACKAN HARBOUR</h1>
+    <p>The heart of The Tide Files: fog, radio signals, strange lights, old tunnels, and Captain Byrne saying “I told ye”.</p>
+  </header>
+
+  <div class="ticker"><span>🌊 HARBOUR WARNING • FOG EXPECTED AFTER 9:13PM • DO NOT APPROACH PIER 3 • LIGHTHOUSE SIGNAL UNDER REVIEW • CAPTAIN BYRNE PROBABLY RIGHT •</span></div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="comics.html">Comics</a>
+    <a href="characters.html">Characters</a>
+    <a href="map.html">Map</a>
+    <a href="gazette.html">Gazette</a>
+    <a href="radio.html">Radio</a>
+    <a href="classified.html">Files</a>
+  </nav>
+
+  <main>
+    <section class="intro">
+      <h2>Harbour Status: Suspiciously Calm</h2>
+      <p>Ballybrackan Harbour looks peaceful by day, but locals know better. After dark, the fog rolls in, radios start whispering, and somebody always claims the lighthouse flashed the wrong way.</p>
+    </section>
+
+    <section class="harbour-stage" aria-label="Interactive Ballybrackan Harbour scene">
+      <div class="moon"></div>
+      <div class="beam"></div>
+      <div class="cliff"></div>
+      <div class="lighthouse" onclick="showAlert('🔦 LIGHTHOUSE LOG: Signal repeated three times. Dan has been notified.')"></div>
+      <div class="water"></div>
+      <div class="pier"></div>
+      <div class="stage-note"><strong>Click the harbour markers.</strong><br>Some locations are more helpful than others.</div>
+
+      <div class="location old-pier" onclick="showAlert('⚠ OLD PIER: Footsteps heard after closing. No owner found.')">Old Pier<small>Do not linger</small></div>
+      <div class="location tunnel" onclick="showAlert('🚫 TIDE TUNNEL: Access restricted. Sandwiches recommended.')">Tide Tunnel<small>Restricted</small></div>
+      <div class="location caves" onclick="showAlert('🕳️ SEA CAVES: Echoes reported. Could be wind. Could be Paudie.')">Sea Caves<small>Echoes</small></div>
+      <div class="location pub" onclick="showAlert('🍺 DOYLE’S PUB: Most harbour investigations end here by accident.')">Doyle’s Pub<small>Unofficial HQ</small></div>
+      <div class="location signal" onclick="showAlert('📻 RADIO SIGNAL: [STATIC] ... 9:13 ... the tide remembers ...')">Radio Signal<small>Unstable</small></div>
+    </section>
+
+    <h2 class="section-title">Harbour Warnings</h2>
+    <section class="grid">
+      <article class="card"><span class="tag">Warning 001</span><h3>Fog After 9:13pm</h3><p>Visibility reduces suddenly. Locals advised to go home, unless already in Doyle’s Pub.</p></article>
+      <article class="card"><span class="tag">Warning 002</span><h3>Old Pier Activity</h3><p>Repeated footsteps heard on empty pier. Council states this is “probably boards settling”.</p></article>
+      <article class="card"><span class="tag">Warning 003</span><h3>Seagull Evidence Risk</h3><p>All sandwiches, chips, statements, and Garda paperwork should be secured.</p></article>
+    </section>
+
+    <h2 class="section-title">Captain Byrne’s Logbook</h2>
+    <section class="logbook">
+      <p>> Sea too quiet last night.</p>
+      <p>> Lighthouse flashed backwards again.</p>
+      <p>> Dan says there is no official cause for concern.</p>
+      <p>> That usually means concern.</p>
+      <p>> Note to self: avoid Tunnel Gate at high tide.</p>
+    </section>
+  </main>
+
+  <div id="harbourAlert" class="harbour-alert"></div>
+
+  <footer>
+    <p>© Ballybrackan Harbour Authority — Probably Safe ☘️</p>
+  </footer>
+
+  <script>
+    const harbourAlert = document.getElementById('harbourAlert');
+    function showAlert(message) {
+      harbourAlert.textContent = message;
+      harbourAlert.classList.add('show');
+      setTimeout(() => harbourAlert.classList.remove('show'), 6200);
+    }
+
+    setTimeout(() => showAlert('🌫️ HARBOUR NOTICE: Fog forming near Pier 3.'), 1800);
+  </script>
+</body>
+</html>
 
