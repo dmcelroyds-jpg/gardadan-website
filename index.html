@@ -673,5 +673,52 @@ window.onload = function () {
 };
 </script>
   <a href="classified.html" class="secret-lighthouse-link" title="Investigate the lighthouse"></a>
+  <script>
+  let secretInput = "";
+
+  function triggerSecret(message) {
+    const alertBox = document.getElementById("bally-alert");
+    alertBox.textContent = message;
+    alertBox.classList.add("show");
+
+    setTimeout(() => {
+      alertBox.classList.remove("show");
+    }, 6500);
+  }
+
+  document.addEventListener("keydown", function (event) {
+    secretInput += event.key.toLowerCase();
+    secretInput = secretInput.slice(-12);
+
+    if (secretInput.includes("913")) {
+      triggerSecret("[STATIC] ... the tide remembers ...");
+      secretInput = "";
+    }
+
+    if (secretInput.includes("fog")) {
+      triggerSecret("🌫️ FOG EVENT: Visibility reduced. Ballybrackan is watching.");
+      document.querySelectorAll(".fog").forEach(fog => {
+        fog.style.opacity = "0.8";
+        fog.style.filter = "blur(50px)";
+      });
+      secretInput = "";
+    }
+
+    if (secretInput.includes("dan")) {
+      triggerSecret("🕵️ GARDA ALERT: Dan requests backup immediately.");
+      secretInput = "";
+    }
+
+    if (secretInput.includes("balls")) {
+      triggerSecret("⚽ CONFIDENTIAL: The chairman knew.");
+      secretInput = "";
+    }
+
+    if (secretInput.includes("seagull")) {
+      triggerSecret("🐦 SEAGULL FILE OPENED: They are more organised than expected.");
+      secretInput = "";
+    }
+  });
+</script>
 </body>
 </html>
