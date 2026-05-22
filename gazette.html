@@ -1,1 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Ballybrackan Gazette</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #ead9aa;
+      color: #111;
+    }
+    header {
+      background: #111;
+      color: #f4c430;
+      text-align: center;
+      padding: 28px 18px;
+      border-bottom: 8px solid #f4c430;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    header p {
+      margin: 8px auto 0;
+      max-width: 850px;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
+    }
+    nav {
+      background: #061c2e;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin: 8px 12px;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    .ticker {
+      background: #f4c430;
+      color: #111;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 4px solid #111;
+      border-bottom: 4px solid #111;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+    }
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 30s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 36px 18px;
+    }
+    .paper {
+      background: #f8edca;
+      border: 5px solid #111;
+      box-shadow: 12px 12px 0 rgba(0,0,0,.25);
+      padding: 24px;
+    }
+    .masthead {
+      text-align: center;
+      border-top: 4px solid #111;
+      border-bottom: 4px solid #111;
+      padding: 16px 0;
+      margin-bottom: 22px;
+    }
+    .masthead h2 {
+      margin: 0;
+      font-size: clamp(2.3rem, 7vw, 5rem);
+      text-transform: uppercase;
+      line-height: .9;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      border-bottom: 3px solid #111;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+    }
+    .lead {
+      display: grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 22px;
+      border-bottom: 4px solid #111;
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+    }
+    .lead h3 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      line-height: .92;
+      text-transform: uppercase;
+    }
+    .lead p, .story p { line-height: 1.45; font-size: 1.05rem; }
+    .photo-box {
+      background: #111;
+      color: white;
+      min-height: 290px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      border: 4px solid #111;
+      outline: 6px solid #f8edca;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 1.35rem;
+    }
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .story {
+      border-right: 2px solid rgba(0,0,0,.35);
+      padding-right: 18px;
+    }
+    .story:last-child { border-right: none; }
+    .story h4 {
+      margin: 0 0 8px;
+      font-size: 1.55rem;
+      text-transform: uppercase;
+      border-bottom: 3px solid #111;
+      padding-bottom: 6px;
+    }
+    .badge {
+      display: inline-block;
+      background: #111;
+      color: #f4c430;
+      padding: 5px 8px;
+      margin-bottom: 8px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .78rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .classifieds {
+      margin-top: 28px;
+      border-top: 4px solid #111;
+      padding-top: 22px;
+    }
+    .classified-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .classified {
+      border: 3px solid #111;
+      padding: 14px;
+      background: #fff7d6;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .classified h5 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+    .ask-dan {
+      margin-top: 28px;
+      background: #10243a;
+      color: white;
+      border: 5px solid #f4c430;
+      padding: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .ask-dan h3 {
+      margin-top: 0;
+      color: #f4c430;
+      font-size: 2rem;
+    }
+    footer {
+      background: #061c2e;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 40px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    @media (max-width: 850px) {
+      nav { position: static; }
+      .lead, .columns { grid-template-columns: 1fr; }
+      .story { border-right: none; border-bottom: 2px solid rgba(0,0,0,.35); padding-right: 0; padding-bottom: 16px; }
+      .story:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The Ballybrackan Gazette</h1>
+    <p>Serving the truth, the rumours, and whatever Doyle heard last night.</p>
+  </header>
+
+  <div class="ticker">
+    <span>BREAKING: BALLS FOUND • SEAGULLS CLEARED OF INVOLVEMENT • FOG PROBABLY FINE • CHAIRMAN STILL SHOUTING • GARDA DAN ASKS PUBLIC TO STAY CALM •</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="comics.html">Comics</a>
+    <a href="characters.html">Characters</a>
+    <a href="map.html">Map</a>
+    <a href="spinoff.html">Spin-Off</a>
+  </nav>
+
+  <main>
+    <div class="paper">
+      <div class="masthead">
+        <h2>Ballybrackan Gazette</h2>
+        <p><strong>Officially unofficial since nobody remembers when</strong></p>
+      </div>
+
+      <div class="meta">
+        <span>Special Edition</span>
+        <span>Price: One tea and a rumour</span>
+        <span>Weather: Suspiciously grand</span>
+      </div>
+
+      <section class="lead">
+        <div>
+          <span class="badge">Main Story</span>
+          <h3>Balls Found! County Final Saved!</h3>
+          <p>Ballybrackan was thrown into sporting panic after every football at the GAA club vanished days before the county final. Garda Dan launched a full investigation, Gerard Downey wandered into several important clues, and the chairman continued shouting throughout.</p>
+          <p>The team went on to win the county final, though several locals insist the seagulls still “look guilty”.</p>
+        </div>
+        <div class="photo-box">
+          EXCLUSIVE PHOTO<br><br>
+          Dan holds the cup while everyone else argues behind him
+        </div>
+      </section>
+
+      <section class="columns">
+        <article class="story">
+          <span class="badge">Sports</span>
+          <h4>Chairman Still Shouting</h4>
+          <p>Seamus “Shouty” Kelly denied causing unnecessary panic, stating that “pressure builds champions” before shouting at a chair for being in the wrong place.</p>
+        </article>
+
+        <article class="story">
+          <span class="badge">Harbour News</span>
+          <h4>Fog Probably Fine</h4>
+          <p>Captain Byrne has warned locals not to trust the fog after 6pm. The council has responded by saying it is “monitoring the situation from indoors”.</p>
+        </article>
+
+        <article class="story">
+          <span class="badge">Garda Notice</span>
+          <h4>Dan Requests Calm</h4>
+          <p>Garda Dan has asked residents to stop reporting every seagull as suspicious unless the bird is carrying evidence, a football, or a breakfast roll.</p>
+        </article>
+      </section>
+
+      <section class="classifieds">
+        <h2>Classifieds & Public Notices</h2>
+        <div class="classified-grid">
+          <div class="classified"><h5>Lost</h5><p>One whistle. Last seen being carried away by a seagull. Reward: half packet of crisps.</p></div>
+          <div class="classified"><h5>For Sale</h5><p>Second-hand tactics board. Only slightly screamed at. Contact Marty.</p></div>
+          <div class="classified"><h5>Warning</h5><p>Do not enter Tide Tunnel unless accompanied by Garda Dan, Captain Byrne, and sandwiches.</p></div>
+          <div class="classified"><h5>Wanted</h5><p>Person who keeps moving the traffic cone. No questions asked. Mostly.</p></div>
+        </div>
+      </section>
+
+      <section class="ask-dan">
+        <h3>Ask Garda Dan</h3>
+        <p><strong>Q:</strong> Is Ballybrackan Harbour haunted?</p>
+        <p><strong>Dan:</strong> Officially, no. Personally, I’d avoid Tuesdays.</p>
+        <p><strong>Q:</strong> Are the seagulls organised?</p>
+        <p><strong>Dan:</strong> I can’t comment during an active investigation.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>© The Ballybrackan Gazette — Printed whenever something ridiculous happens ☘️</p>
+  </footer>
+</body>
+</html>
 
