@@ -1,1 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ballybrackan Confidential Files</title>
 
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #061c2e;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #061c2e, #10243a);
+      text-align: center;
+      padding: 40px 20px;
+      border-bottom: 8px solid #f4c430;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #f4c430;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      text-shadow: 3px 3px #000;
+    }
+
+    header p {
+      max-width: 800px;
+      margin: 12px auto 0;
+      font-size: 1.1rem;
+    }
+
+    nav {
+      background: #020b12;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 12px;
+      display: inline-block;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #f4c430;
+    }
+
+    main {
+      max-width: 1150px;
+      margin: auto;
+      padding: 45px 18px;
+    }
+
+    .warning {
+      background: #8b0000;
+      border: 5px solid #f4c430;
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 40px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,.35);
+    }
+
+    .warning h2 {
+      margin-top: 0;
+      color: #f4c430;
+      font-size: 2rem;
+    }
+
+    .files-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .file-card {
+      background: #10243a;
+      border: 5px solid #f4c430;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 8px 8px 0 rgba(0,0,0,.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stamp {
+      position: absolute;
+      top: 12px;
+      right: -30px;
+      background: #d4481c;
+      color: white;
+      padding: 6px 40px;
+      transform: rotate(35deg);
+      font-weight: bold;
+      font-size: .8rem;
+      border: 2px solid white;
+    }
+
+    .file-card h3 {
+      color: #f4c430;
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+
+    .status {
+      display: inline-block;
+      background: #f4c430;
+      color: #10243a;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .redacted {
+      background: black;
+      color: black;
+      padding: 2px 6px;
+      border-radius: 4px;
+      user-select: none;
+    }
+
+    .terminal {
+      margin-top: 50px;
+      background: black;
+      border: 5px solid #7cff98;
+      border-radius: 18px;
+      padding: 22px;
+      color: #7cff98;
+      font-family: "Courier New", monospace;
+      box-shadow: 8px 8px 0 rgba(0,0,0,.35);
+    }
+
+    .terminal p {
+      animation: flicker 2s infinite;
+    }
+
+    @keyframes flicker {
+      0%,100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+
+    footer {
+      background: #020b12;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 40px;
+    }
+
+    /* Fog */
+    .fog-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .fog {
+      position: absolute;
+      width: 900px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12), rgba(255,255,255,0));
+      filter: blur(35px);
+      opacity: 0.35;
+      animation: driftFog linear infinite;
+    }
+
+    .fog-1 {
+      top: 10%;
+      left: -30%;
+      animation-duration: 60s;
+    }
+
+    .fog-2 {
+      top: 50%;
+      left: -40%;
+      animation-duration: 85s;
+    }
+
+    @keyframes driftFog {
+      from { transform: translateX(0); }
+      to { transform: translateX(170vw); }
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        position: static;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="fog-container">
+    <div class="fog fog-1"></div>
+    <div class="fog fog-2"></div>
+  </div>
+
+  <header>
+    <h1>CONFIDENTIAL FILES</h1>
+    <p>Property of Garda Dan Investigations Unit — Ballybrackan Division</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="gazette.html">Gazette</a>
+    <a href="radio.html">Radio</a>
+    <a href="spinoff.html">Spin-Off</a>
+  </nav>
+
+  <main>
+
+    <section class="warning">
+      <h2>⚠ AUTHORISED PERSONNEL ONLY ⚠</h2>
+      <p>Several files below remain under active investigation.</p>
+      <p>Residents are advised not to enter tunnels, harbours, or suspicious sheds without tea.</p>
+    </section>
+
+    <section class="files-grid">
+
+      <article class="file-card">
+        <div class="stamp">UNSOLVED</div>
+        <span class="status">Case File 001</span>
+        <h3>The Traffic Cone Incident</h3>
+        <p>A traffic cone appeared in six separate locations within 24 hours.</p>
+        <p>Main suspect: <span class="redacted">REDACTED</span></p>
+      </article>
+
+      <article class="file-card">
+        <div class="stamp">ACTIVE</div>
+        <span class="status">Harbour Report</span>
+        <h3>The Lighthouse Event</h3>
+        <p>Captain Byrne reported lighthouse beam rotating “the wrong direction”.</p>
+        <p>Dan described report as “concerningly concerning”.</p>
+      </article>
+
+      <article class="file-card">
+        <div class="stamp">CLASSIFIED</div>
+        <span class="status">Tunnel Log</span>
+        <h3>The Tunnel Below Ballybrackan</h3>
+        <p>Access restricted after strange radio transmissions heard underground.</p>
+        <p>Official explanation: “probably pipes.”</p>
+      </article>
+
+      <article class="file-card">
+        <div class="stamp">SEALED</div>
+        <span class="status">GAA Investigation</span>
+        <h3>The Missing Balls Case</h3>
+        <p>Footballs recovered successfully.</p>
+        <p>Seagulls officially cleared of involvement.</p>
+      </article>
+
+      <article class="file-card">
+        <div class="stamp">WARNING</div>
+        <span class="status">Wildlife Division</span>
+        <h3>Seagull Intelligence Report</h3>
+        <p>Multiple residents claim seagulls are “watching people”.</p>
+        <p>No evidence found. Yet.</p>
+      </article>
+
+      <article class="file-card">
+        <div class="stamp">RESTRICTED</div>
+        <span class="status">Emergency Notice</span>
+        <h3>The Fog</h3>
+        <p>Fog repeatedly appears despite weather forecast showing clear skies.</p>
+        <p>Recommendation: avoid harbour after 9:13pm.</p>
+      </article>
+
+    </section>
+
+    <section class="terminal">
+      <h2>RADIO TRANSCRIPT</h2>
+
+      <p>[STATIC]</p>
+
+      <p>“…they opened it…”</p>
+
+      <p>[SIGNAL INTERRUPTION]</p>
+
+      <p>“…the tide remembers…”</p>
+
+      <p>[END OF FILE]</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© Garda Dan Confidential Archives ☘️</p>
+  </footer>
+
+</body>
+</html>
