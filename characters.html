@@ -1,1 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garda Dan — Characters</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5e7b8;
+      color: #10243a;
+    }
+    header {
+      background: linear-gradient(135deg, #042b52, #0b4f2f);
+      color: white;
+      text-align: center;
+      padding: 34px 18px;
+      border-bottom: 8px solid #f4c430;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      color: #f4c430;
+      text-shadow: 3px 3px #000;
+      letter-spacing: 2px;
+    }
+    header p {
+      max-width: 850px;
+      margin: 12px auto 0;
+      font-size: 1.15rem;
+    }
+    nav {
+      background: #061c2e;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin: 8px 12px;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    .ticker {
+      background: #10243a;
+      color: #f4c430;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 3px solid #f4c430;
+      border-bottom: 3px solid #f4c430;
+      font-weight: bold;
+    }
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 30s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 45px 18px;
+    }
+    h2.section-title {
+      font-size: 2.2rem;
+      margin: 0 0 24px;
+      border-bottom: 5px solid #f4c430;
+      display: inline-block;
+    }
+    .intro {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 8px 8px 0 #f4c430;
+      margin-bottom: 35px;
+    }
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .character-card {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 8px 8px 0 rgba(16,36,58,.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .character-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 12px 12px 0 rgba(16,36,58,.25);
+    }
+    .portrait {
+      height: 260px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 18px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px #000;
+      background: linear-gradient(135deg, #0b4f2f, #f4c430);
+    }
+    .dan { background: linear-gradient(135deg, #f4c430, #0a2e57); }
+    .gerard { background: linear-gradient(135deg, #0b7a34, #f4c430); }
+    .chairman { background: linear-gradient(135deg, #d4481c, #10243a); }
+    .manager { background: linear-gradient(135deg, #1d83c1, #10243a); }
+    .paudie { background: linear-gradient(135deg, #7b4f20, #f4c430); }
+    .byrne { background: linear-gradient(135deg, #061c2e, #1d83c1); }
+    .aoife { background: linear-gradient(135deg, #7a2dd4, #f4c430); }
+    .kaz { background: linear-gradient(135deg, #333, #0b7a34); }
+    .body { padding: 20px; }
+    .body h3 {
+      margin: 0 0 8px;
+      font-size: 1.55rem;
+    }
+    .body p { line-height: 1.45; }
+    .stats {
+      background: #f5e7b8;
+      border: 3px solid #10243a;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 14px;
+    }
+    .stats div {
+      padding: 5px 0;
+      border-bottom: 1px dashed rgba(16,36,58,.35);
+    }
+    .stats div:last-child { border-bottom: none; }
+    .quote {
+      background: #10243a;
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 14px;
+      font-style: italic;
+      border: 3px solid #f4c430;
+    }
+    .tag {
+      display: inline-block;
+      background: #10243a;
+      color: white;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .8rem;
+      margin: 3px 3px 8px 0;
+    }
+    .notice {
+      margin-top: 40px;
+      background: #10243a;
+      color: white;
+      border-radius: 18px;
+      border: 5px solid #f4c430;
+      padding: 26px;
+      text-align: center;
+    }
+    footer {
+      background: #061c2e;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 35px;
+    }
+    @media (max-width: 760px) {
+      nav { position: static; }
+      .portrait { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CHARACTER FILES</h1>
+    <p>The official Ballybrackan character database: heroes, suspects, club officials, sea prophets, accidental detectives, and people who definitely know more than they should.</p>
+  </header>
+
+  <div class="ticker">
+    <span>🕵️ GARDA DAN FILES OPENED • ⚽ CHAIRMAN STILL SHOUTING • 🌊 CAPTAIN BYRNE PROBABLY RIGHT • 🐦 SEAGULLS REMAIN UNDER REVIEW • ☘️ BALLYBRACKAN CHARACTER DATABASE LIVE •</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="comics.html">Comics</a>
+    <a href="season1.html">Season 1</a>
+    <a href="spinoff.html">Spin-Off</a>
+  </nav>
+
+  <main>
+    <section class="intro">
+      <h2>Welcome To The Ballybrackan Files</h2>
+      <p>Every great comic town needs a cast of strange locals. Ballybrackan has more than most. Some are heroes. Some are suspects. Some are both before lunchtime.</p>
+    </section>
+
+    <h2 class="section-title">Main Characters</h2>
+
+    <div class="character-grid">
+      <article class="character-card">
+        <div class="portrait dan">GARDA DAN</div>
+        <div class="body">
+          <span class="tag">Main Hero</span><span class="tag">Tea Powered</span>
+          <h3>Garda Dan</h3>
+          <p>Ballybrackan’s favourite Garda. Good-hearted, suspicious, easily distracted, and always trying to keep the peace while the town refuses to behave.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Mostly calm</div>
+            <div><strong>Known Enemy:</strong> Seagulls, fog, paperwork</div>
+            <div><strong>Last Seen:</strong> Investigating something ridiculous</div>
+          </div>
+          <div class="quote">“Right so… we’ll look into it after the tea.”</div>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <div class="portrait gerard">GERARD DOWNEY</div>
+        <div class="body">
+          <span class="tag">Accidental Detective</span><span class="tag">Lucky</span>
+          <h3>Gerard Downey</h3>
+          <p>Gerard finds clues by wandering into the wrong places, overhearing gossip, and generally not knowing what is happening.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Confusing</div>
+            <div><strong>Special Skill:</strong> Accidental evidence discovery</div>
+            <div><strong>Last Seen:</strong> Following Dan by mistake</div>
+          </div>
+          <div class="quote">“Was I meant to find that?”</div>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <div class="portrait chairman">SEAMUS “SHOUTY” KELLY</div>
+        <div class="body">
+          <span class="tag">GAA Chairman</span><span class="tag">Volume Warning</span>
+          <h3>Seamus “Shouty” Kelly</h3>
+          <p>The Ballybrackan GAA chairman. Believes all problems can be solved with tradition, shouting, and blaming the manager.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Loud</div>
+            <div><strong>Known Enemy:</strong> Modern tactics</div>
+            <div><strong>Last Seen:</strong> Shouting near the clubhouse</div>
+          </div>
+          <div class="quote">“THIS CLUB WAS BUILT ON DISCIPLINE!”</div>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <div class="portrait manager">MARTY “THE TACTICIAN” MURPHY</div>
+        <div class="body">
+          <span class="tag">Team Manager</span><span class="tag">Tactics Board Owner</span>
+          <h3>Marty “The Tactician” Murphy</h3>
+          <p>The GAA manager who thinks every match can be won with arrows, diagrams, and yelling “more passion” at tired players.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Strategically unstable</div>
+            <div><strong>Known Enemy:</strong> The chairman</div>
+            <div><strong>Last Seen:</strong> Drawing impossible arrows</div>
+          </div>
+          <div class="quote">“You’re destroying the dressing room!”</div>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <div class="portrait paudie">PAUDIE CAN MAN</div>
+        <div class="body">
+          <span class="tag">Suspicious Local</span><span class="tag">Unreliable Witness</span>
+          <h3>Paudie Can Man</h3>
+          <p>A local character who sometimes knows exactly what happened, but rarely knows why, when, or where he put it afterward.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Depends on the pub</div>
+            <div><strong>Known Skill:</strong> Forgetting important details</div>
+            <div><strong>Last Seen:</strong> Almost confessing</div>
+          </div>
+          <div class="quote">“In fairness, I was told to hide them.”</div>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <div class="portrait byrne">CAPTAIN BYRNE</div>
+        <div class="body">
+          <span class="tag">Harbour Legend</span><span class="tag">Probably Right</span>
+          <h3>Captain Byrne</h3>
+          <p>Old fisherman, storyteller, and sea-weather philosopher. Everyone thinks he’s exaggerating until it turns out he was right.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Cryptic</div>
+            <div><strong>Known Enemy:</strong> Calm seas</div>
+            <div><strong>Last Seen:</strong> Warning people too late</div>
+          </div>
+          <div class="quote">“The sea keeps better records than people.”</div>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <div class="portrait aoife">AOIFE</div>
+        <div class="body">
+          <span class="tag">Researcher</span><span class="tag">Too Smart For This</span>
+          <h3>Aoife</h3>
+          <p>Sharp, brave, and organised. Aoife usually spots the clue everyone else has been standing beside for twenty minutes.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Clipboard dangerous</div>
+            <div><strong>Known Enemy:</strong> Bad explanations</div>
+            <div><strong>Last Seen:</strong> Correcting Dan’s theory</div>
+          </div>
+          <div class="quote">“That makes absolutely no sense, Dan.”</div>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <div class="portrait kaz">KAZ</div>
+        <div class="body">
+          <span class="tag">Bin Man</span><span class="tag">Rocket Scientist?</span>
+          <h3>Kaz</h3>
+          <p>A calm, mysterious bin man who may or may not have once been a rocket scientist. He sees everything because nobody notices the bin man.</p>
+          <div class="stats">
+            <div><strong>Threat Level:</strong> Quietly intelligent</div>
+            <div><strong>Known Enemy:</strong> Bad engineering</div>
+            <div><strong>Last Seen:</strong> Knowing too much</div>
+          </div>
+          <div class="quote">“Statistically inevitable.”</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="notice">
+      <h2>More Files Coming Soon</h2>
+      <p>Next we can add real character artwork, search filters, suspicion ratings, and a full Ballybrackan Encyclopedia.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© Garda Dan Comics — Character Files ☘️</p>
+  </footer>
+</body>
+</html>
 
