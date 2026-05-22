@@ -1,1 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garda Dan — Ballybrackan Map</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5e7b8;
+      color: #10243a;
+    }
+    header {
+      background: linear-gradient(135deg, #042b52, #0b4f2f);
+      color: white;
+      text-align: center;
+      padding: 34px 18px;
+      border-bottom: 8px solid #f4c430;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      color: #f4c430;
+      text-shadow: 3px 3px #000;
+      letter-spacing: 2px;
+    }
+    header p {
+      max-width: 850px;
+      margin: 12px auto 0;
+      font-size: 1.15rem;
+    }
+    nav {
+      background: #061c2e;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin: 8px 12px;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    .ticker {
+      background: #10243a;
+      color: #f4c430;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 3px solid #f4c430;
+      border-bottom: 3px solid #f4c430;
+      font-weight: bold;
+    }
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 30s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 45px 18px;
+    }
+    .intro {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 8px 8px 0 #f4c430;
+      margin-bottom: 35px;
+    }
+    h2.section-title {
+      font-size: 2.2rem;
+      margin: 0 0 24px;
+      border-bottom: 5px solid #f4c430;
+      display: inline-block;
+    }
+    .map-stage {
+      position: relative;
+      min-height: 650px;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(244,196,48,.45), transparent 17%),
+        radial-gradient(circle at 78% 20%, rgba(255,255,255,.35), transparent 18%),
+        linear-gradient(160deg, #75c66b 0%, #2f9b55 42%, #2a7faa 43%, #1d83c1 64%, #061c2e 100%);
+      border: 6px solid #10243a;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 10px 10px 0 rgba(16,36,58,.28);
+      margin-bottom: 42px;
+    }
+    .map-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,.12) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,.12) 25%, transparent 25%);
+      background-size: 60px 60px;
+      opacity: .15;
+    }
+    .road {
+      position: absolute;
+      background: #d9c48b;
+      border: 4px solid #10243a;
+      border-radius: 999px;
+      opacity: .95;
+    }
+    .road.one { width: 85%; height: 55px; left: 7%; top: 47%; transform: rotate(-8deg); }
+    .road.two { width: 55px; height: 70%; left: 48%; top: 15%; transform: rotate(12deg); }
+    .coast-label {
+      position: absolute;
+      right: 35px;
+      bottom: 32px;
+      color: white;
+      font-size: clamp(1.8rem, 5vw, 4rem);
+      font-weight: bold;
+      text-shadow: 3px 3px #000;
+      opacity: .85;
+    }
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: white;
+      border: 4px solid #10243a;
+      border-radius: 16px;
+      padding: 10px 12px;
+      min-width: 135px;
+      text-align: center;
+      box-shadow: 6px 6px 0 rgba(16,36,58,.25);
+      font-weight: bold;
+      cursor: default;
+      transition: transform .2s ease, box-shadow .2s ease;
+      z-index: 2;
+    }
+    .pin:hover {
+      transform: translate(-50%, -55%) scale(1.04);
+      box-shadow: 9px 9px 0 rgba(16,36,58,.25);
+    }
+    .pin small {
+      display: block;
+      font-weight: normal;
+      margin-top: 4px;
+      font-size: .78rem;
+    }
+    .pin.garda { left: 28%; top: 38%; }
+    .pin.pub { left: 39%; top: 56%; }
+    .pin.gaa { left: 18%; top: 67%; }
+    .pin.harbour { left: 70%; top: 60%; }
+    .pin.lighthouse { left: 85%; top: 24%; }
+    .pin.cove { left: 83%; top: 78%; }
+    .pin.salt { left: 62%; top: 34%; }
+    .pin.watch { left: 54%; top: 18%; }
+    .pin.tunnel { left: 50%; top: 48%; background: #f4c430; }
+    .pin.bog { left: 18%; top: 22%; background: #dce8d1; }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+    .location-card {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 7px 7px 0 rgba(16,36,58,.24);
+      transition: transform .2s ease;
+    }
+    .location-card:hover { transform: translateY(-4px); }
+    .location-card h3 { margin: 0 0 8px; font-size: 1.45rem; }
+    .rating {
+      display: inline-block;
+      background: #10243a;
+      color: white;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: .82rem;
+      margin: 4px 4px 10px 0;
+    }
+    .rumour {
+      background: #f5e7b8;
+      border: 3px dashed #10243a;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+      font-style: italic;
+    }
+    .notice {
+      margin-top: 40px;
+      background: #10243a;
+      color: white;
+      border-radius: 18px;
+      border: 5px solid #f4c430;
+      padding: 26px;
+      text-align: center;
+    }
+    footer {
+      background: #061c2e;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 35px;
+    }
+    @media (max-width: 760px) {
+      nav { position: static; }
+      .map-stage { min-height: 760px; }
+      .pin { min-width: 120px; font-size: .85rem; padding: 8px; }
+      .pin.garda { left: 31%; top: 35%; }
+      .pin.pub { left: 42%; top: 52%; }
+      .pin.gaa { left: 22%; top: 70%; }
+      .pin.harbour { left: 70%; top: 60%; }
+      .pin.lighthouse { left: 75%; top: 18%; }
+      .pin.cove { left: 72%; top: 82%; }
+      .pin.salt { left: 62%; top: 31%; }
+      .pin.watch { left: 45%; top: 15%; }
+      .pin.tunnel { left: 52%; top: 44%; }
+      .pin.bog { left: 21%; top: 18%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>THE BALLYBRACKAN MAP</h1>
+    <p>Every suspicious road, haunted harbour, football pitch, foggy cove and pub-related incident in one place.</p>
+  </header>
+
+  <div class="ticker">
+    <span>🗺️ MAP UPDATED • 🌊 HARBOUR STILL SUSPICIOUS • ⚽ GAA CLUB UNDER REVIEW • 🕵️ GARDA STATION ACCEPTING TEA • 🐦 SEAGULLS NOT TO BE TRUSTED •</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="comics.html">Comics</a>
+    <a href="characters.html">Characters</a>
+    <a href="season1.html">Season 1</a>
+    <a href="spinoff.html">Spin-Off</a>
+  </nav>
+
+  <main>
+    <section class="intro">
+      <h2>Welcome To Ballybrackan</h2>
+      <p>A small Irish town where every location has a rumour, every rumour has a witness, and every witness eventually ends up in Doyle’s Pub.</p>
+    </section>
+
+    <h2 class="section-title">Town Map</h2>
+    <section class="map-stage" aria-label="Illustrated Ballybrackan map">
+      <div class="road one"></div>
+      <div class="road two"></div>
+      <div class="coast-label">THE COAST</div>
+
+      <div class="pin garda">Garda Station<small>Tea-powered justice</small></div>
+      <div class="pin pub">Doyle’s Pub<small>Evidence usually ends here</small></div>
+      <div class="pin gaa">GAA Club<small>High drama, low tactics</small></div>
+      <div class="pin harbour">Harbour<small>Fog suspicious after 6pm</small></div>
+      <div class="pin lighthouse">Old Lighthouse<small>Lights itself sometimes</small></div>
+      <div class="pin cove">Smuggler’s Cove<small>Do not ask questions</small></div>
+      <div class="pin salt">The Salt House<small>Abandoned. Allegedly.</small></div>
+      <div class="pin watch">Watch Hill<small>Great views, bad omens</small></div>
+      <div class="pin tunnel">Tide Tunnel<small>Entry discouraged</small></div>
+      <div class="pin bog">Black Bog<small>Screams disputed</small></div>
+    </section>
+
+    <h2 class="section-title">Location Files</h2>
+    <section class="location-grid">
+      <article class="location-card">
+        <h3>Ballybrackan Garda Station</h3>
+        <span class="rating">Suspicion Rating: Medium</span>
+        <p>Small station, big kettle. Most cases begin with Dan misplacing a notebook.</p>
+        <div class="rumour">Rumour: The filing cabinet knows more than Sergeant O’Dwyer.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>Doyle’s Pub</h3>
+        <span class="rating">Suspicion Rating: High</span>
+        <p>The unofficial headquarters of gossip, accidental confessions, and emergency chips.</p>
+        <div class="rumour">Rumour: The clock once ran backwards and nobody paid their tabs for a week.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>Ballybrackan GAA Club</h3>
+        <span class="rating">Suspicion Rating: Loud</span>
+        <p>Home of county final chaos, missing footballs, tactical disasters, and shouting chairmen.</p>
+        <div class="rumour">Rumour: The seagulls know where the spare balls are hidden.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>Ballybrackan Harbour</h3>
+        <span class="rating">Suspicion Rating: Foggy</span>
+        <p>Pretty during the day. Questionable after dark. Radio signals are not guaranteed to be friendly.</p>
+        <div class="rumour">Rumour: Captain Byrne once argued with a buoy and lost.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>The Old Lighthouse</h3>
+        <span class="rating">Suspicion Rating: Very High</span>
+        <p>Abandoned, except when it mysteriously turns itself on during storms.</p>
+        <div class="rumour">Rumour: If the light flashes three times, Doyle closes early.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>Smuggler’s Cove</h3>
+        <span class="rating">Suspicion Rating: Don’t Ask</span>
+        <p>Picturesque cliffs, hidden caves, and the strong feeling someone is watching from above.</p>
+        <div class="rumour">Rumour: Tourists love it. Locals pretend it does not exist.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>The Salt House</h3>
+        <span class="rating">Suspicion Rating: Rotten</span>
+        <p>An abandoned fish factory that definitely should not have working lights at night.</p>
+        <div class="rumour">Rumour: The smell is either old fish or old secrets.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>Watch Hill</h3>
+        <span class="rating">Suspicion Rating: Stormy</span>
+        <p>The best place to see strange lights, bad weather, and people pretending they are not scared.</p>
+        <div class="rumour">Rumour: Mrs Flanagan saw something there in 1987 and refuses to elaborate.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>The Tide Tunnel</h3>
+        <span class="rating">Suspicion Rating: Extreme</span>
+        <p>Flooded, dangerous, and constantly involved in things Dan wishes he had not found.</p>
+        <div class="rumour">Rumour: The tunnel goes further than the map admits.</div>
+      </article>
+
+      <article class="location-card">
+        <h3>Black Bog</h3>
+        <span class="rating">Suspicion Rating: Screaming</span>
+        <p>Known for fog, strange noises, and locals confidently giving five different explanations.</p>
+        <div class="rumour">Rumour: The bog does not take people. Usually.</div>
+      </article>
+    </section>
+
+    <div class="notice">
+      <h2>More Ballybrackan Locations Coming Soon</h2>
+      <p>Next we can add real map artwork, hidden Easter eggs, hover clues, and clickable location pages.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© Garda Dan Comics — Ballybrackan Map ☘️</p>
+  </footer>
+</body>
+</html>
 
