@@ -1,1 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garda Dan — Ballybrackan Timeline</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5e7b8;
+      color: #10243a;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, #042b52, #0b4f2f);
+      color: white;
+      text-align: center;
+      padding: 38px 18px;
+      border-bottom: 8px solid #f4c430;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
+      color: #f4c430;
+      text-shadow: 3px 3px #000;
+      letter-spacing: 2px;
+    }
+    header p {
+      max-width: 860px;
+      margin: 12px auto 0;
+      font-size: 1.15rem;
+    }
+    nav {
+      background: #061c2e;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin: 8px 12px;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    .ticker {
+      background: #10243a;
+      color: #f4c430;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 3px solid #f4c430;
+      border-bottom: 3px solid #f4c430;
+      font-weight: bold;
+    }
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 30s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    main {
+      max-width: 1150px;
+      margin: auto;
+      padding: 45px 18px;
+    }
+    .intro {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 8px 8px 0 #f4c430;
+      margin-bottom: 40px;
+    }
+    .intro h2 { margin-top: 0; color: #0b4f2f; font-size: 2rem; }
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: #10243a;
+      border-radius: 999px;
+      transform: translateX(-50%);
+      box-shadow: 0 0 0 4px #f4c430;
+    }
+    .event {
+      position: relative;
+      width: 50%;
+      padding: 24px 34px;
+    }
+    .event.left { left: 0; text-align: right; }
+    .event.right { left: 50%; }
+    .event::before {
+      content: "";
+      position: absolute;
+      top: 42px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f4c430;
+      border: 5px solid #10243a;
+      z-index: 3;
+    }
+    .event.left::before { right: -17px; }
+    .event.right::before { left: -17px; }
+    .card {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 8px 8px 0 rgba(16,36,58,.25);
+      transition: transform .2s ease;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+      color: #0b4f2f;
+    }
+    .label {
+      display: inline-block;
+      background: #10243a;
+      color: white;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: .82rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .yellow { background: #f4c430; color: #10243a; }
+    .dark { background: #061c2e; color: white; }
+    .blue { background: #1d83c1; color: white; }
+    .red { background: #d4481c; color: white; }
+    .card p { line-height: 1.45; }
+    .button {
+      display: inline-block;
+      background: #f4c430;
+      color: #10243a;
+      padding: 11px 16px;
+      border: 3px solid #10243a;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 4px 4px 0 #10243a;
+      margin-top: 10px;
+    }
+    .button.darkbtn { background: #10243a; color: white; }
+    .legend {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+    .legend-item {
+      background: #10243a;
+      color: white;
+      border: 5px solid #f4c430;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 7px 7px 0 rgba(16,36,58,.25);
+    }
+    .legend-item h3 { color: #f4c430; margin-top: 0; }
+    footer {
+      background: #061c2e;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 40px;
+    }
+    @media (max-width: 850px) {
+      nav { position: static; }
+      .timeline::before { left: 20px; }
+      .event, .event.left, .event.right {
+        width: 100%;
+        left: 0;
+        text-align: left;
+        padding-left: 58px;
+        padding-right: 0;
+      }
+      .event.left::before, .event.right::before {
+        left: 4px;
+        right: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>BALLYBRACKAN TIMELINE</h1>
+    <p>The official, mostly accurate history of Garda Dan, Ballybrackan, the missing balls, the fog, and everything the town refuses to explain.</p>
+  </header>
+
+  <div class="ticker">
+    <span>🕰️ TIMELINE UPDATED • THE TOWN GOT MORE REAL • BONFIRE INCIDENT LOGGED • TIDE FILES ADDED • GAA BALLS RECOVERED •</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="comics.html">Comics</a>
+    <a href="characters.html">Characters</a>
+    <a href="map.html">Map</a>
+    <a href="harbour.html">Harbour</a>
+    <a href="gazette.html">Gazette</a>
+    <a href="radio.html">Radio</a>
+    <a href="classified.html">Files</a>
+  </nav>
+
+  <main>
+    <section class="intro">
+      <h2>The Story So Far</h2>
+      <p>Ballybrackan started as a bright, silly town full of small mysteries and local chaos. But with every season, more secrets surfaced. The world became darker, sharper, and stranger — until even Garda Dan began to see the town differently.</p>
+    </section>
+
+    <section class="timeline">
+      <div class="event left">
+        <article class="card">
+          <span class="label yellow">Season 1</span>
+          <h3>The Bright Yellow Era</h3>
+          <p>Garda Dan begins his early adventures in a colourful Ballybrackan full of simple chaos, suspicious locals, and mysteries that still feel mostly harmless.</p>
+          <a class="button" href="season1.html">Read Season 1</a>
+        </article>
+      </div>
+
+      <div class="event right">
+        <article class="card">
+          <span class="label red">Spin-Off</span>
+          <h3>The Case Of The Missing Balls</h3>
+          <p>The Ballybrackan GAA team loses every football days before the county final. Garda Dan investigates, Gerard helps by accident, and the chairman shouts history into existence.</p>
+          <a class="button" href="spinoff.html">Read Spin-Off</a>
+        </article>
+      </div>
+
+      <div class="event left">
+        <article class="card">
+          <span class="label">Season 2</span>
+          <h3>The Humour Gets Darker</h3>
+          <p>The town becomes stranger. The jokes remain, but the shadows get longer. Old rumours, odd locals, and unexplained events begin to connect.</p>
+          <a class="button darkbtn" href="comics.html">Coming Soon</a>
+        </article>
+      </div>
+
+      <div class="event right">
+        <article class="card">
+          <span class="label dark">Season 3</span>
+          <h3>The Ballybrackan Incident</h3>
+          <p>The bonfire, the cover-up, the tunnels, and the truth nobody wanted to discuss. Dan learns that Ballybrackan protects its secrets with tea, silence, and terrible excuses.</p>
+          <a class="button darkbtn" href="comics.html">Coming Soon</a>
+        </article>
+      </div>
+
+      <div class="event left">
+        <article class="card">
+          <span class="label blue">Season 4</span>
+          <h3>The Tide Files</h3>
+          <p>The mystery moves to the harbour. Fog rolls in, radios whisper, the lighthouse flashes, and Dan chooses truth over silence beneath the weight of the sea.</p>
+          <a class="button darkbtn" href="harbour.html">Explore Harbour</a>
+        </article>
+      </div>
+
+      <div class="event right">
+        <article class="card">
+          <span class="label dark">Secret Files</span>
+          <h3>The Classified Archives Open</h3>
+          <p>Hidden files reveal the traffic cone incident, the seagull intelligence reports, tunnel logs, and strange radio transcripts that should probably not be public.</p>
+          <a class="button darkbtn" href="classified.html">Open Files</a>
+        </article>
+      </div>
+
+      <div class="event left">
+        <article class="card">
+          <span class="label yellow">Season 5 Teaser</span>
+          <h3>The Town Got More Real</h3>
+          <p>Ballybrackan did not simply change style. Dan changed how he saw it. Once the truth surfaced, the town stopped looking like a cartoon.</p>
+          <a class="button" href="index.html#season5">Season 5 Teaser</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="legend">
+      <article class="legend-item">
+        <h3>Bright Era</h3>
+        <p>Simple shapes, bright colours, comic chaos, and Garda Dan at his most innocent.</p>
+      </article>
+      <article class="legend-item">
+        <h3>Mystery Era</h3>
+        <p>The town starts connecting its strange events into something bigger.</p>
+      </article>
+      <article class="legend-item">
+        <h3>The Real Era</h3>
+        <p>Fog, secrets, deeper shadows, and Ballybrackan revealing what it was hiding all along.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>© Garda Dan Comics — Ballybrackan Timeline ☘️</p>
+  </footer>
+</body>
+</html>
 
