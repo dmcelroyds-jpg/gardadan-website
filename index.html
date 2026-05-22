@@ -636,6 +636,14 @@
 
   setTimeout(showBallyAlert, 2500);
   setInterval(showBallyAlert, 14000);
+
+<script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("loader").classList.add("hide");
+    }, 900);
+  });
+</script>
 </script>
 </body>
 </html>
