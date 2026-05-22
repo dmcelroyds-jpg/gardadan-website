@@ -1,1 +1,272 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garda Dan — Comic Archive</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5e7b8;
+      color: #10243a;
+    }
+    header {
+      background: linear-gradient(135deg, #042b52, #0b4f2f);
+      color: white;
+      padding: 32px 18px;
+      text-align: center;
+      border-bottom: 8px solid #f4c430;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      color: #f4c430;
+      text-shadow: 3px 3px #000;
+      letter-spacing: 2px;
+    }
+    header p {
+      max-width: 800px;
+      margin: 12px auto 0;
+      font-size: 1.15rem;
+    }
+    nav {
+      background: #061c2e;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 12px;
+      display: inline-block;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    .ticker {
+      background: #10243a;
+      color: #f4c430;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 3px solid #f4c430;
+      border-bottom: 3px solid #f4c430;
+      font-weight: bold;
+    }
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 28s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 45px 18px;
+    }
+    h2.section-title {
+      font-size: 2.2rem;
+      margin: 0 0 24px;
+      border-bottom: 5px solid #f4c430;
+      display: inline-block;
+    }
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .comic-card {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 8px 8px 0 rgba(16,36,58,.25);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .comic-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 12px 12px 0 rgba(16,36,58,.25);
+    }
+    .comic-card img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      display: block;
+      background: #ddd;
+    }
+    .placeholder {
+      height: 340px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      color: white;
+      background: linear-gradient(135deg, #0b4f2f, #1d83c1, #f4c430);
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px #000;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-body h3 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+    }
+    .card-body p {
+      line-height: 1.45;
+    }
+    .button {
+      display: inline-block;
+      background: #f4c430;
+      color: #10243a;
+      padding: 12px 18px;
+      border: 3px solid #10243a;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 4px 4px 0 #10243a;
+      margin-top: 10px;
+    }
+    .button.dark {
+      background: #10243a;
+      color: white;
+    }
+    .tag {
+      display: inline-block;
+      background: #10243a;
+      color: white;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .8rem;
+      margin: 3px 3px 8px 0;
+    }
+    .notice {
+      margin-top: 40px;
+      background: #10243a;
+      color: white;
+      border-radius: 18px;
+      border: 5px solid #f4c430;
+      padding: 26px;
+      text-align: center;
+    }
+    footer {
+      background: #061c2e;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 35px;
+    }
+    @media (max-width: 760px) {
+      nav { position: static; }
+      .comic-card img, .placeholder { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>COMIC ARCHIVE</h1>
+    <p>Every Garda Dan comic series, spin-off, mystery, and Ballybrackan disaster in one place.</p>
+  </header>
+
+  <div class="ticker">
+    <span>☘️ WELCOME TO THE GARDA DAN ARCHIVE • ⚽ MISSING BALLS CASE NOW READING • 🌊 THE TIDE FILES WAIT IN THE FOG • 🐦 SEAGULLS STILL SUSPICIOUS •</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="season1.html">Season 1</a>
+    <a href="spinoff.html">Spin-Off</a>
+    <a href="#coming-soon">Coming Soon</a>
+  </nav>
+
+  <main>
+    <h2 class="section-title">Read The Comics</h2>
+
+    <div class="archive-grid">
+      <article class="comic-card">
+        <img src="https://github.com/dmcelroyds-jpg/gardadan-website/blob/main/season-1-cover-page.png?raw=true" alt="Garda Dan Season 1 Cover">
+        <div class="card-body">
+          <span class="tag">Classic Style</span>
+          <span class="tag">Bright Yellow Dan</span>
+          <h3>Season 1</h3>
+          <p>The first Ballybrackan adventures. Bright, silly, chaotic, and full of local nonsense.</p>
+          <a class="button" href="season1.html">Read Season 1</a>
+        </div>
+      </article>
+
+      <article class="comic-card">
+        <div class="placeholder">Season 2<br>The Mystery Grows</div>
+        <div class="card-body">
+          <span class="tag">Dark Humour</span>
+          <span class="tag">Town Lore</span>
+          <h3>Season 2</h3>
+          <p>The town gets stranger, the humour gets darker, and Ballybrackan begins to reveal its secrets.</p>
+          <a class="button dark" href="#coming-soon">Coming Soon</a>
+        </div>
+      </article>
+
+      <article class="comic-card">
+        <div class="placeholder">Season 3<br>The Ballybrackan Incident</div>
+        <div class="card-body">
+          <span class="tag">Mystery</span>
+          <span class="tag">The Incident</span>
+          <h3>Season 3</h3>
+          <p>A full connected mystery about the bonfire, the tunnels, the cover-up, and what Ballybrackan refuses to discuss.</p>
+          <a class="button dark" href="#coming-soon">Coming Soon</a>
+        </div>
+      </article>
+
+      <article class="comic-card">
+        <div class="placeholder">Season 4<br>The Tide Files</div>
+        <div class="card-body">
+          <span class="tag">Coastal Mystery</span>
+          <span class="tag">The Tide Files</span>
+          <h3>Season 4</h3>
+          <p>Fog, harbour lights, sea caves, strange signals, and Garda Dan choosing truth over silence.</p>
+          <a class="button dark" href="#coming-soon">Coming Soon</a>
+        </div>
+      </article>
+
+      <article class="comic-card">
+        <img src="https://github.com/dmcelroyds-jpg/gardadan-website/blob/main/spin-off-cover.png?raw=true" alt="The Case Of The Missing Balls Cover">
+        <div class="card-body">
+          <span class="tag">GAA Comedy</span>
+          <span class="tag">Spin-Off</span>
+          <h3>The Case Of The Missing Balls</h3>
+          <p>The Ballybrackan GAA team’s footballs vanish days before the county final. Dan investigates. Everyone panics.</p>
+          <a class="button" href="spinoff.html">Read Spin-Off</a>
+        </div>
+      </article>
+
+      <article class="comic-card" id="coming-soon">
+        <div class="placeholder">Season 5<br>The Town Got More Real</div>
+        <div class="card-body">
+          <span class="tag">Coming Soon</span>
+          <span class="tag">New Era</span>
+          <h3>Season 5</h3>
+          <p>Before Season 5 begins, readers will learn why Ballybrackan — and Garda Dan himself — started to look different.</p>
+          <a class="button dark" href="index.html#season5">Season 5 Teaser</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="notice">
+      <h2>More Pages Coming Soon</h2>
+      <p>Upload each season’s covers and episodes to GitHub, then we can turn every card into a full comic reader.</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© Garda Dan Comics — Ballybrackan Forever ☘️</p>
+  </footer>
+</body>
+</html>
