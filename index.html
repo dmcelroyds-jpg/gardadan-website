@@ -743,5 +743,25 @@ window.onload = function () {
     }
   });
 </script>
+  <script>
+  const dailyEvents = [
+    "⚠ HARBOUR CLOSED DUE TO SUSPICIOUS FOG",
+    "⚽ CHAIRMAN SHOUTING INCIDENT REPORTED",
+    "🐦 SEAGULLS STEAL CHIPS AGAIN",
+    "📻 RADIO SIGNAL DETECTED AT 9:13PM",
+    "☘ GARDA DAN REQUESTS CALM IMMEDIATELY",
+    "🌊 CAPTAIN BYRNE SAYS THE SEA IS ACTING ODD",
+    "🕵️ GERARD DOWNEY FINDS CLUE BY ACCIDENT",
+    "🚧 TRAFFIC CONE MOVED AGAIN"
+  ];
+
+  const today = new Date().toDateString();
+  const eventIndex = Math.abs(
+    today.split("").reduce((total, char) => total + char.charCodeAt(0), 0)
+  ) % dailyEvents.length;
+
+  document.getElementById("daily-event").textContent =
+    "TODAY IN BALLYBRACKAN: " + dailyEvents[eventIndex];
+</script>
 </body>
 </html>
