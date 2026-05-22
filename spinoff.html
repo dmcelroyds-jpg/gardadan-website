@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garda Dan — The Case Of The Missing Balls</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5e7b8;
+      color: #10243a;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(135deg, #0a2e57, #0b7a34);
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      border-bottom: 8px solid #f4c430;
+      position: relative;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 7vw, 5rem);
+      color: #f4c430;
+      text-shadow: 3px 3px #000;
+      letter-spacing: 2px;
+    }
+    header p {
+      max-width: 850px;
+      margin: 12px auto 0;
+      font-size: 1.15rem;
+    }
+    nav {
+      background: #061c2e;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 8px 12px;
+      display: inline-block;
+      font-weight: bold;
+    }
+    nav a:hover { color: #f4c430; }
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 42px 18px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .hero img {
+      width: 100%;
+      border-radius: 16px;
+      border: 5px solid #10243a;
+      box-shadow: 10px 10px 0 rgba(16,36,58,.25);
+      background: white;
+    }
+    .hero-card {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 10px 10px 0 #f4c430;
+    }
+    .hero-card h2 {
+      margin-top: 0;
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      color: #0b7a34;
+    }
+    .button {
+      display: inline-block;
+      background: #f4c430;
+      color: #10243a;
+      padding: 13px 20px;
+      border-radius: 12px;
+      border: 3px solid #10243a;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 4px 4px 0 #10243a;
+      margin-top: 14px;
+    }
+    h2.section-title {
+      font-size: 2.2rem;
+      border-bottom: 5px solid #f4c430;
+      display: inline-block;
+      margin-bottom: 22px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border: 4px solid #10243a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 6px 6px 0 rgba(16,36,58,.22);
+      transition: transform .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      background: #ddd;
+    }
+    .card-content {
+      padding: 18px;
+    }
+    .comic-reader {
+      background: white;
+      border: 5px solid #10243a;
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 8px 8px 0 rgba(16,36,58,.25);
+    }
+    .comic-reader img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+    .ticker {
+      background: #10243a;
+      color: #f4c430;
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      font-weight: bold;
+      border-top: 4px solid #f4c430;
+      border-bottom: 4px solid #f4c430;
+    }
+    .ticker span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 22s linear infinite;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    .notice {
+      background: #10243a;
+      color: white;
+      border-radius: 18px;
+      border: 5px solid #f4c430;
+      padding: 24px;
+      text-align: center;
+    }
+    footer {
+      background: #061c2e;
+      color: white;
+      text-align: center;
+      padding: 28px 18px;
+      margin-top: 40px;
+    }
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>THE CASE OF THE MISSING BALLS</h1>
+    <p>A Garda Dan spin-off full of GAA chaos, missing footballs, shouting managers, suspicious seagulls, and one very confused detective team.</p>
+  </header>
+
+  <div class="ticker">
+    <span>⚽ BALLS FOUND! • ⚽ COUNTY FINAL CHAOS • ⚽ SEAGULLS DENY INVOLVEMENT • ⚽ CHAIRMAN STILL SHOUTING • ⚽ DAN DEMANDS ANSWERS •</span>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#episodes">Episodes</a>
+    <a href="#reader">Comic Reader</a>
+    <a href="#characters">Characters</a>
+    <a href="#extras">Extras</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <img src="https://github.com/dmcelroyds-jpg/gardadan-website/blob/main/spin-off-cover.png?raw=true" alt="The Case Of The Missing Balls Cover">
+
+      <div class="hero-card">
+        <h2>Small Town. Big Match. No Balls.</h2>
+        <p>The Ballybrackan GAA team is days away from the county final when disaster strikes — every football disappears overnight.</p>
+        <p>Now Garda Dan and accidental detective Gerard Downey must uncover the truth before the biggest match in Ballybrackan history collapses into chaos.</p>
+        <a class="button" href="#reader">Read The Comic</a>
+      </div>
+    </section>
+
+    <section id="episodes">
+      <h2 class="section-title">Episodes</h2>
+
+      <div class="grid">
+        <article class="card">
+          <img src="https://github.com/dmcelroyds-jpg/gardadan-website/blob/main/spin-off-cover.png?raw=true" alt="Cover">
+          <div class="card-content">
+            <h3>Cover Page</h3>
+            <p>The county final approaches.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="https://github.com/dmcelroyds-jpg/gardadan-website/blob/main/spin-off-episode-1.png?raw=true" alt="Episode 1">
+          <div class="card-content">
+            <h3>Episode 1 — Training Cancelled</h3>
+            <p>The footballs vanish and Ballybrackan panics.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <div style="height:300px;display:grid;place-items:center;background:linear-gradient(135deg,#0b7a34,#f4c430);color:white;font-size:1.5rem;font-weight:bold;text-shadow:2px 2px #000;">More Episodes Coming Soon</div>
+          <div class="card-content">
+            <h3>More Chaos Ahead</h3>
+            <p>Upload more pages to expand the spin-off reader.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="reader">
+      <h2 class="section-title">Comic Reader</h2>
+      <div class="comic-reader">
+        <img src="https://github.com/dmcelroyds-jpg/gardadan-website/blob/main/spin-off-episode-1.png?raw=true" alt="Spin-Off Episode 1">
+      </div>
+    </section>
+
+    <section id="characters">
+      <h2 class="section-title">Main Characters</h2>
+      <div class="grid">
+        <article class="card"><div style="height:220px;display:grid;place-items:center;background:#f4c430;font-size:1.5rem;font-weight:bold;color:#10243a;">GARDA DAN</div><div class="card-content"><h3>Garda Dan</h3><p>Treating a missing football investigation like a national emergency.</p></div></article>
+        <article class="card"><div style="height:220px;display:grid;place-items:center;background:#0b7a34;font-size:1.5rem;font-weight:bold;color:white;">GERARD DOWNEY</div><div class="card-content"><h3>Gerard Downey</h3><p>Accidentally solving crimes through confusion and luck.</p></div></article>
+        <article class="card"><div style="height:220px;display:grid;place-items:center;background:#10243a;font-size:1.4rem;font-weight:bold;color:white;">SEAMUS KELLY</div><div class="card-content"><h3>The Chairman</h3><p>Constantly shouting about “club tradition”.</p></div></article>
+        <article class="card"><div style="height:220px;display:grid;place-items:center;background:#d4481c;font-size:1.4rem;font-weight:bold;color:white;">MARTY MURPHY</div><div class="card-content"><h3>The Manager</h3><p>Armed with tactics boards and dramatic speeches.</p></div></article>
+      </div>
+    </section>
+
+    <section id="extras">
+      <h2 class="section-title">Extras</h2>
+      <div class="notice">
+        <h3>Coming Soon To Ballybrackan GAA</h3>
+        <p>Fake ads, Gazette pages, bonus mini comics, and the complete county final disaster archive.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© Garda Dan Comics — UP BALLYBRACKAN ☘️</p>
+  </footer>
+</body>
+</html>
