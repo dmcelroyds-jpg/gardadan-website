@@ -609,7 +609,7 @@
 
 <div class="lighthouse-beam"></div>
 
-<div class="seagull">🕊️</div>
+<div class="seagull" id="secret-seagull" title="Suspicious seagull">🕊️</div>
   <div id="bally-alert" class="bally-alert"></div>
 
 <script>
@@ -636,6 +636,14 @@
 
   setTimeout(showBallyAlert, 2500);
   setInterval(showBallyAlert, 14000);
+  document.getElementById("secret-seagull").addEventListener("click", function () {
+  alertBox.textContent = "🐦 SEAGULL INTERCEPTED: They know about the balls.";
+  alertBox.classList.add("show");
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 6500);
+});
 </script>
 
 <script>
