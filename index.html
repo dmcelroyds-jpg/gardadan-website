@@ -638,12 +638,14 @@
   setInterval(showBallyAlert, 14000);
 
 <script>
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("loader").classList.add("hide");
-    }, 900);
-  });
-</script>
+window.onload = function () {
+  const loader = document.getElementById("loader");
+
+  setTimeout(function () {
+    loader.style.opacity = "0";
+    loader.style.visibility = "hidden";
+  }, 1200);
+};
 </script>
 </body>
 </html>
