@@ -752,10 +752,11 @@ window.onload = function () {
     secretInput += event.key.toLowerCase();
     secretInput = secretInput.slice(-12);
 
-    if (secretInput.includes("913")) {
-      triggerSecret("[STATIC] ... the tide remembers ...");
-      secretInput = "";
-    }
+ if (secretInput.includes("913")) {
+  triggerSecret("[STATIC] ... the tide remembers ...");
+  saveClue("Radio signal 913 intercepted");
+  secretInput = "";
+}
 
     if (secretInput.includes("fog")) {
       triggerSecret("🌫️ FOG EVENT: Visibility reduced. Ballybrackan is watching.");
