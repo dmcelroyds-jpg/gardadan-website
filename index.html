@@ -758,7 +758,8 @@ window.onload = function () {
   secretInput = "";
 }
 
-    if (secretInput.includes("fog")) {
+if (secretInput.includes("fog")) {
+  saveClue("Fog event triggered");
       triggerSecret("🌫️ FOG EVENT: Visibility reduced. Ballybrackan is watching.");
       document.querySelectorAll(".fog").forEach(fog => {
         fog.style.opacity = "0.8";
