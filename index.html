@@ -773,10 +773,11 @@ if (secretInput.includes("fog")) {
       secretInput = "";
     }
 
-    if (secretInput.includes("balls")) {
-      triggerSecret("⚽ CONFIDENTIAL: The chairman knew.");
-      secretInput = "";
-    }
+if (secretInput.includes("balls")) {
+  triggerSecret("⚽ CONFIDENTIAL: The chairman knew.");
+  saveClue("Chairman linked to football disappearance");
+  secretInput = "";
+}
 
     if (secretInput.includes("seagull")) {
       triggerSecret("🐦 SEAGULL FILE OPENED: They are more organised than expected.");
