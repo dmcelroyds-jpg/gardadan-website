@@ -677,14 +677,40 @@ cursor: pointer;
 
   setTimeout(showBallyAlert, 2500);
   setInterval(showBallyAlert, 14000);
-  document.getElementById("secret-seagull").addEventListener("click", function () {
-  alertBox.textContent = "🐦 SEAGULL INTERCEPTED: They know about the balls.";
+function saveClue(clueName) {
+  let clues = JSON.parse(localStorage.getItem("gardaDanClues")) || [];
+
+  if (!clues.includes(clueName)) {
+    clues.push(clueName);
+    localStorage.setItem("gardaDanClues", JSON.stringify(clues));
+  }
+
+  updateCaseFile();
+}
+
+function updateCaseFile() {
+  const clues = JSON.parse(localStorage.getItem("gardaDanClues")) || [];
+  const clueBox = document.getElementById("clue-list");
+
+  if (!clueBox) return;
+
+  clueBox.innerHTML = clues.length
+    ? clues.map(clue => `<li>${clue}</li>`).join("")
+    : "<li>No clues found yet.</li>";
+}
+
+document.getElementById("secret-seagull").addEventListener("click", function () {
+  alertBox.textContent = "🐦 CLUE FOUND: Seagull activity connected to missing evidence.";
   alertBox.classList.add("show");
+
+  saveClue("Seagull activity connected to missing evidence");
 
   setTimeout(() => {
     alertBox.classList.remove("show");
   }, 6500);
 });
+
+updateCaseFile();
 </script>
 
 <script>
