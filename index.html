@@ -898,5 +898,12 @@ function resetClues() {
   updateCaseFile();
 }
 </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof updateCaseFile === "function") {
+      updateCaseFile();
+    }
+  });
+</script>
 </body>
 </html>
