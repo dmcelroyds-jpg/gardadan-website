@@ -654,7 +654,36 @@ cursor: pointer;
     <p>© Garda Dan Comics — Ballybrackan Forever ☘️</p>
     <section id="locked-files">
   <h2 class="section-title">Locked Investigation Files</h2>
+<div id="unlocked-file-2" style="display:none; margin-top:20px;">
+  <div class="notice">
+    <h3>🔓 FILE UNLOCKED: Lighthouse Transmission</h3>
 
+    <p>
+      Recovered audio transcript from Ballybrackan Lighthouse.
+    </p>
+
+    <p><strong>[BEGIN TRANSCRIPT]</strong></p>
+
+    <p>
+      “…signal repeating…”
+    </p>
+
+    <p>
+      “…they should not have opened the tunnel…”
+    </p>
+
+    <p>
+      “…the sea remembers everything…”
+    </p>
+
+    <p><strong>[END TRANSCRIPT]</strong></p>
+
+    <p>
+      Official response from Garda Dan:
+      “That could honestly be anything.”
+    </p>
+  </div>
+</div>
   <div class="notice" id="locked-message">
     🔒 Additional files require more evidence.
   </div>
@@ -759,6 +788,11 @@ if (clues.length >= 3) {
   unlockedFile.style.display = "block";
   lockedMessage.innerHTML =
     "🔓 Investigation access upgraded.";
+}
+  const unlockedFile2 = document.getElementById("unlocked-file-2");
+
+if (clues.length >= 5) {
+  unlockedFile2.style.display = "block";
 }
 <script>
 window.onload = function () {
