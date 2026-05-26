@@ -707,6 +707,200 @@ cursor: pointer;
 
       <p>
         Official response from Garda Dan:
-        “That
+        “That could honestly be anything.”
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© Garda Dan Comics — Ballybrackan Forever ☘️</p>
+</footer>
+
+<div class="fog-container">
+  <div class="fog fog-1"></div>
+  <div class="fog fog-2"></div>
+  <div class="fog fog-3"></div>
+</div>
+
+<a class="lighthouse-beam" href="classified.html"></a>
+
+<a href="classified.html"
+   class="secret-lighthouse-link"
+   onclick="saveClue('Lighthouse access opened confidential files')"
+   title="Investigate the lighthouse"></a>
+
+<div class="seagull" id="secret-seagull" title="Suspicious seagull">
+  🕊️
+</div>
+
+<div id="bally-alert" class="bally-alert"></div>
+
+<script>
+const alerts = [
+  "⚠ GARDA NOTICE: Please stop reporting every fog cloud as paranormal.",
+  "⚽ GAA ALERT: The chairman has been asked to reduce shouting volume.",
+  "🐦 SEAGULL WARNING: Keep chips and evidence secure.",
+  "🌊 HARBOUR UPDATE: One suspicious barrel seen floating. Again.",
+  "☘ BALLYBRACKAN NOTICE: If you hear screaming, check the bog first.",
+  "🕵️ GARDA DAN: Remain calm. Unless you have lost footballs."
+];
+
+const alertBox = document.getElementById("bally-alert");
+
+function showBallyAlert() {
+  const message = alerts[Math.floor(Math.random() * alerts.length)];
+
+  alertBox.textContent = message;
+  alertBox.classList.add("show");
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 5200);
+}
+
+setTimeout(showBallyAlert, 2500);
+setInterval(showBallyAlert, 14000);
+
+function saveClue(clueName) {
+  let clues = JSON.parse(localStorage.getItem("gardaDanClues")) || [];
+
+  if (!clues.includes(clueName)) {
+    clues.push(clueName);
+    localStorage.setItem("gardaDanClues", JSON.stringify(clues));
+  }
+
+  updateCaseFile();
+}
+
+function updateCaseFile() {
+  const clues = JSON.parse(localStorage.getItem("gardaDanClues")) || [];
+  const clueBox = document.getElementById("clue-list");
+
+  if (!clueBox) return;
+
+  clueBox.innerHTML = clues.length
+    ? clues.map(clue => `<li>${clue}</li>`).join("")
+    : "<li>No clues found yet.</li>";
+
+  const unlockedFile = document.getElementById("unlocked-file");
+  const unlockedFile2 = document.getElementById("unlocked-file-2");
+  const lockedMessage = document.getElementById("locked-message");
+
+  if (clues.length >= 5) {
+    unlockedFile.style.display = "block";
+    unlockedFile2.style.display = "block";
+    lockedMessage.innerHTML =
+      "🔓 Investigation access fully upgraded.";
+  } else if (clues.length >= 3) {
+    unlockedFile.style.display = "block";
+    lockedMessage.innerHTML =
+      "🔓 Investigation access upgraded.";
+  } else {
+    lockedMessage.innerHTML =
+      "🔒 Additional files require more evidence.";
+  }
+}
+
+document.getElementById("secret-seagull").addEventListener("click", function () {
+  alertBox.textContent =
+    "🐦 CLUE FOUND: Seagull activity connected to missing evidence.";
+
+  alertBox.classList.add("show");
+
+  saveClue("Seagull activity connected to missing evidence");
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 6500);
+});
+
+function resetClues() {
+  localStorage.removeItem("gardaDanClues");
+  updateCaseFile();
+}
+
+let secretInput = "";
+
+function triggerSecret(message) {
+  alertBox.textContent = message;
+  alertBox.classList.add("show");
+
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+  }, 6500);
+}
+
+document.addEventListener("keydown", function (event) {
+  secretInput += event.key.toLowerCase();
+  secretInput = secretInput.slice(-12);
+
+  if (secretInput.includes("913")) {
+    triggerSecret("[STATIC] ... the tide remembers ...");
+    saveClue("Radio signal 913 intercepted");
+    secretInput = "";
+  }
+
+  if (secretInput.includes("fog")) {
+    triggerSecret("🌫️ FOG EVENT: Visibility reduced.");
+    saveClue("Fog event triggered");
+
+    document.querySelectorAll(".fog").forEach(fog => {
+      fog.style.opacity = "0.8";
+      fog.style.filter = "blur(50px)";
+    });
+
+    secretInput = "";
+  }
+
+  if (secretInput.includes("balls")) {
+    triggerSecret("⚽ CONFIDENTIAL: The chairman knew.");
+    saveClue("Chairman linked to football disappearance");
+    secretInput = "";
+  }
+
+  if (secretInput.includes("dan")) {
+    triggerSecret("🕵️ GARDA ALERT: Dan requests backup immediately.");
+    secretInput = "";
+  }
+
+  if (secretInput.includes("seagull")) {
+    triggerSecret("🐦 SEAGULL FILE OPENED.");
+    secretInput = "";
+  }
+});
+
+const dailyEvents = [
+  "⚠ HARBOUR CLOSED DUE TO SUSPICIOUS FOG",
+  "⚽ CHAIRMAN SHOUTING INCIDENT REPORTED",
+  "🐦 SEAGULLS STEAL CHIPS AGAIN",
+  "📻 RADIO SIGNAL DETECTED AT 9:13PM",
+  "☘ GARDA DAN REQUESTS CALM IMMEDIATELY",
+  "🌊 CAPTAIN BYRNE SAYS THE SEA IS ACTING ODD",
+  "🕵️ GERARD DOWNEY FINDS CLUE BY ACCIDENT",
+  "🚧 TRAFFIC CONE MOVED AGAIN"
+];
+
+const today = new Date().toDateString();
+
+const eventIndex = Math.abs(
+  today.split("").reduce((total, char) => {
+    return total + char.charCodeAt(0);
+  }, 0)
+) % dailyEvents.length;
+
+document.getElementById("daily-event").textContent =
+  "TODAY IN BALLYBRACKAN: " + dailyEvents[eventIndex];
+
+window.onload = function () {
+  const loader = document.getElementById("loader");
+
+  setTimeout(function () {
+    loader.classList.add("hide");
+  }, 1200);
+
+  updateCaseFile();
+};
+</script>
 </body>
 </html>
