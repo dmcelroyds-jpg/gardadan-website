@@ -752,7 +752,14 @@ document.getElementById("secret-seagull").addEventListener("click", function () 
 
 updateCaseFile();
 </script>
+const unlockedFile = document.getElementById("unlocked-file");
+const lockedMessage = document.getElementById("locked-message");
 
+if (clues.length >= 3) {
+  unlockedFile.style.display = "block";
+  lockedMessage.innerHTML =
+    "🔓 Investigation access upgraded.";
+}
 <script>
 window.onload = function () {
   const loader = document.getElementById("loader");
