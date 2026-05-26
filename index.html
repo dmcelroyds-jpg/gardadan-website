@@ -639,7 +639,8 @@ cursor: pointer;
 <p class="secret-hint">
   ⚠ Some Ballybrackan files only reveal themselves to those who know what to type...
 </p>
-  <section id="case-file">
+
+<section id="case-file">
   <h2 class="section-title">Garda Dan Case File</h2>
 
   <div class="notice">
@@ -647,60 +648,22 @@ cursor: pointer;
 
     <ul id="clue-list">
       <li>No clues found yet.</li>
-      const unlockedFile = document.getElementById("unlocked-file");
-const unlockedFile2 = document.getElementById("unlocked-file-2");
-const lockedMessage = document.getElementById("locked-message");
-
-if (clues.length >= 5) {
-  unlockedFile.style.display = "block";
-  unlockedFile2.style.display = "block";
-  lockedMessage.innerHTML = "🔓 Investigation access fully upgraded.";
-} else if (clues.length >= 3) {
-  unlockedFile.style.display = "block";
-  lockedMessage.innerHTML = "🔓 Investigation access upgraded.";
-} else {
-  lockedMessage.innerHTML = "🔒 Additional files require more evidence.";
-}
     </ul>
+
+    <br>
+
+    <button class="button" onclick="resetClues()">
+      Reset Investigation
+    </button>
   </div>
 </section>
-  <footer>
-    <p>© Garda Dan Comics — Ballybrackan Forever ☘️</p>
-    <section id="locked-files">
+
+<section id="locked-files">
   <h2 class="section-title">Locked Investigation Files</h2>
-<div id="unlocked-file-2" style="display:none; margin-top:20px;">
-  <div class="notice">
-    <h3>🔓 FILE UNLOCKED: Lighthouse Transmission</h3>
 
-    <p>
-      Recovered audio transcript from Ballybrackan Lighthouse.
-    </p>
-
-    <p><strong>[BEGIN TRANSCRIPT]</strong></p>
-
-    <p>
-      “…signal repeating…”
-    </p>
-
-    <p>
-      “…they should not have opened the tunnel…”
-    </p>
-
-    <p>
-      “…the sea remembers everything…”
-    </p>
-
-    <p><strong>[END TRANSCRIPT]</strong></p>
-
-    <p>
-      Official response from Garda Dan:
-      “That could honestly be anything.”
-    </p>
+  <div class="notice" id="locked-message">
+    Checking investigation access...
   </div>
-</div>
- <div class="notice" id="locked-message">
-  Checking investigation access...
-</div>
 
   <div id="unlocked-file" style="display:none; margin-top:20px;">
     <div class="notice">
@@ -723,187 +686,27 @@ if (clues.length >= 5) {
       </p>
     </div>
   </div>
-</section>
-  </footer>
-  <div class="fog-container">
-  <div class="fog fog-1"></div>
-  <div class="fog fog-2"></div>
-  <div class="fog fog-3"></div>
-</div>
 
-<a class="lighthouse-beam" href="classified.html" title="Investigate the lighthouse"></a>
+  <div id="unlocked-file-2" style="display:none; margin-top:20px;">
+    <div class="notice">
+      <h3>🔓 FILE UNLOCKED: Lighthouse Transmission</h3>
 
-<div class="seagull" id="secret-seagull" title="Suspicious seagull">🕊️</div>
-  <div id="bally-alert" class="bally-alert"></div>
+      <p>
+        Recovered audio transcript from Ballybrackan Lighthouse.
+      </p>
 
-<script>
-  const alerts = [
-    "⚠ GARDA NOTICE: Please stop reporting every fog cloud as paranormal.",
-    "⚽ GAA ALERT: The chairman has been asked to reduce shouting volume.",
-    "🐦 SEAGULL WARNING: Keep chips and evidence secure.",
-    "🌊 HARBOUR UPDATE: One suspicious barrel seen floating. Again.",
-    "☘ BALLYBRACKAN NOTICE: If you hear screaming, check the bog first.",
-    "🕵️ GARDA DAN: Remain calm. Unless you have lost footballs."
-  ];
+      <p><strong>[BEGIN TRANSCRIPT]</strong></p>
 
-  const alertBox = document.getElementById("bally-alert");
+      <p>“…signal repeating…”</p>
 
-  function showBallyAlert() {
-    const message = alerts[Math.floor(Math.random() * alerts.length)];
-    alertBox.textContent = message;
-    alertBox.classList.add("show");
+      <p>“…they should not have opened the tunnel…”</p>
 
-    setTimeout(() => {
-      alertBox.classList.remove("show");
-    }, 5200);
-  }
+      <p>“…the sea remembers everything…”</p>
 
-  setTimeout(showBallyAlert, 2500);
-  setInterval(showBallyAlert, 14000);
-function saveClue(clueName) {
-  let clues = JSON.parse(localStorage.getItem("gardaDanClues")) || [];
+      <p><strong>[END TRANSCRIPT]</strong></p>
 
-  if (!clues.includes(clueName)) {
-    clues.push(clueName);
-    localStorage.setItem("gardaDanClues", JSON.stringify(clues));
-  }
-
-  updateCaseFile();
-}
-
-function updateCaseFile() {
-  const clues = JSON.parse(localStorage.getItem("gardaDanClues")) || [];
-  const clueBox = document.getElementById("clue-list");
-
-  if (!clueBox) return;
-
-  clueBox.innerHTML = clues.length
-    ? clues.map(clue => `<li>${clue}</li>`).join("")
-    : "<li>No clues found yet.</li>";
-}
-
-document.getElementById("secret-seagull").addEventListener("click", function () {
-  alertBox.textContent = "🐦 CLUE FOUND: Seagull activity connected to missing evidence.";
-  alertBox.classList.add("show");
-
-  saveClue("Seagull activity connected to missing evidence");
-
-  setTimeout(() => {
-    alertBox.classList.remove("show");
-  }, 6500);
-});
-
-updateCaseFile();
-</script>
-const unlockedFile = document.getElementById("unlocked-file");
-const lockedMessage = document.getElementById("locked-message");
-
-if (clues.length >= 3) {
-  unlockedFile.style.display = "block";
-  lockedMessage.innerHTML =
-    "🔓 Investigation access upgraded.";
-}
-  const unlockedFile2 = document.getElementById("unlocked-file-2");
-
-if (clues.length >= 5) {
-  unlockedFile2.style.display = "block";
-}
-<script>
-window.onload = function () {
-  const loader = document.getElementById("loader");
-
-  setTimeout(function () {
-    loader.style.opacity = "0";
-    loader.style.visibility = "hidden";
-  }, 1200);
-};
-</script>
-<a href="classified.html"
-   class="secret-lighthouse-link"
-   onclick="saveClue('Lighthouse access opened confidential files')" title="Investigate the lighthouse"></a>
-  <script>
-  let secretInput = "";
-
-  function triggerSecret(message) {
-    const alertBox = document.getElementById("bally-alert");
-    alertBox.textContent = message;
-    alertBox.classList.add("show");
-
-    setTimeout(() => {
-      alertBox.classList.remove("show");
-    }, 6500);
-  }
-
-  document.addEventListener("keydown", function (event) {
-    secretInput += event.key.toLowerCase();
-    secretInput = secretInput.slice(-12);
-
- if (secretInput.includes("913")) {
-  triggerSecret("[STATIC] ... the tide remembers ...");
-  saveClue("Radio signal 913 intercepted");
-  secretInput = "";
-}
-
-if (secretInput.includes("fog")) {
-  saveClue("Fog event triggered");
-      triggerSecret("🌫️ FOG EVENT: Visibility reduced. Ballybrackan is watching.");
-      document.querySelectorAll(".fog").forEach(fog => {
-        fog.style.opacity = "0.8";
-        fog.style.filter = "blur(50px)";
-      });
-      secretInput = "";
-    }
-
-    if (secretInput.includes("dan")) {
-      triggerSecret("🕵️ GARDA ALERT: Dan requests backup immediately.");
-      secretInput = "";
-    }
-
-if (secretInput.includes("balls")) {
-  triggerSecret("⚽ CONFIDENTIAL: The chairman knew.");
-  saveClue("Chairman linked to football disappearance");
-  secretInput = "";
-}
-
-    if (secretInput.includes("seagull")) {
-      triggerSecret("🐦 SEAGULL FILE OPENED: They are more organised than expected.");
-      secretInput = "";
-    }
-    <button class="button" onclick="resetClues()">Reset Investigation</button>
-  });
-</script>
-  <script>
-  const dailyEvents = [
-    "⚠ HARBOUR CLOSED DUE TO SUSPICIOUS FOG",
-    "⚽ CHAIRMAN SHOUTING INCIDENT REPORTED",
-    "🐦 SEAGULLS STEAL CHIPS AGAIN",
-    "📻 RADIO SIGNAL DETECTED AT 9:13PM",
-    "☘ GARDA DAN REQUESTS CALM IMMEDIATELY",
-    "🌊 CAPTAIN BYRNE SAYS THE SEA IS ACTING ODD",
-    "🕵️ GERARD DOWNEY FINDS CLUE BY ACCIDENT",
-    "🚧 TRAFFIC CONE MOVED AGAIN"
-  ];
-
-  const today = new Date().toDateString();
-  const eventIndex = Math.abs(
-    today.split("").reduce((total, char) => total + char.charCodeAt(0), 0)
-  ) % dailyEvents.length;
-
-  document.getElementById("daily-event").textContent =
-    "TODAY IN BALLYBRACKAN: " + dailyEvents[eventIndex];
-</script>
-  <script>
-function resetClues() {
-  localStorage.removeItem("gardaDanClues");
-  updateCaseFile();
-}
-</script>
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    if (typeof updateCaseFile === "function") {
-      updateCaseFile();
-    }
-  });
-</script>
+      <p>
+        Official response from Garda Dan:
+        “That
 </body>
 </html>
