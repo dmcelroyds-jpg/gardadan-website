@@ -886,15 +886,11 @@ const eventIndex = Math.abs(
 document.getElementById("daily-event").textContent =
   "TODAY IN BALLYBRACKAN: " + dailyEvents[eventIndex];
 
-window.onload = function () {
-  const loader = document.getElementById("loader");
-
-  setTimeout(function () {
-    loader.classList.add("hide");
-  }, 1200);
-
+<script>
+document.addEventListener("DOMContentLoaded", function () {
   updateCaseFile();
-};
+});
+</script>
 </script>
 </body>
 </html>
