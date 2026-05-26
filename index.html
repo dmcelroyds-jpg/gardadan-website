@@ -821,6 +821,7 @@ if (secretInput.includes("balls")) {
       triggerSecret("🐦 SEAGULL FILE OPENED: They are more organised than expected.");
       secretInput = "";
     }
+    <button class="button" onclick="resetClues()">Reset Investigation</button>
   });
 </script>
   <script>
@@ -842,6 +843,12 @@ if (secretInput.includes("balls")) {
 
   document.getElementById("daily-event").textContent =
     "TODAY IN BALLYBRACKAN: " + dailyEvents[eventIndex];
+</script>
+  <script>
+function resetClues() {
+  localStorage.removeItem("gardaDanClues");
+  updateCaseFile();
+}
 </script>
 </body>
 </html>
