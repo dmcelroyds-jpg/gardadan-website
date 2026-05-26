@@ -647,6 +647,20 @@ cursor: pointer;
 
     <ul id="clue-list">
       <li>No clues found yet.</li>
+      const unlockedFile = document.getElementById("unlocked-file");
+const unlockedFile2 = document.getElementById("unlocked-file-2");
+const lockedMessage = document.getElementById("locked-message");
+
+if (clues.length >= 5) {
+  unlockedFile.style.display = "block";
+  unlockedFile2.style.display = "block";
+  lockedMessage.innerHTML = "🔓 Investigation access fully upgraded.";
+} else if (clues.length >= 3) {
+  unlockedFile.style.display = "block";
+  lockedMessage.innerHTML = "🔓 Investigation access upgraded.";
+} else {
+  lockedMessage.innerHTML = "🔒 Additional files require more evidence.";
+}
     </ul>
   </div>
 </section>
