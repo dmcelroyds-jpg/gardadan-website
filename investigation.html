@@ -227,6 +227,22 @@ footer{
   }
 
 }
+  .radio-button{
+  background:#f4c430;
+  color:#111;
+  border:none;
+  padding:14px 20px;
+  border-radius:12px;
+  font-weight:bold;
+  font-size:1rem;
+  cursor:pointer;
+  border:3px solid #111;
+  box-shadow:4px 4px 0 rgba(0,0,0,.35);
+}
+
+.radio-button:hover{
+  transform:translateY(-2px);
+}
 </style>
 </head>
 
@@ -366,6 +382,29 @@ Official explanation:
 © Garda Dan Investigation Division ☘️
 </p>
 </footer>
+<script>
+function playTransmission(){
 
+  const audio = new Audio(
+    "https://actions.google.com/sounds/v1/alarms/radio_static.ogg"
+  );
+
+  audio.volume = 0.4;
+  audio.play();
+
+  const messages = [
+    "[STATIC] ... the tide remembers ...",
+    "[STATIC] ... keep Dan away from the tunnel ...",
+    "[STATIC] ... chairman still shouting ...",
+    "[STATIC] ... seagulls observed near pier 3 ..."
+  ];
+
+  const randomMessage =
+    messages[Math.floor(Math.random() * messages.length)];
+
+  document.getElementById("radio-message").innerHTML =
+    "<p><strong>" + randomMessage + "</strong></p>";
+}
+</script>
 </body>
 </html>
