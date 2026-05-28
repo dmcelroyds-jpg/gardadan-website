@@ -529,6 +529,40 @@ cursor: pointer;
   font-weight: bold;
   font-size: 1.05rem;
 }
+    .welcome-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+.welcome-card{
+  background:white;
+  border:4px solid #10243a;
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+  box-shadow:6px 6px 0 rgba(16,36,58,.25);
+}
+
+.welcome-card:hover{
+  transform:translateY(-4px);
+}
+
+.welcome-number{
+  display:block;
+  font-size:3rem;
+  font-weight:bold;
+  color:#0b4f2f;
+  margin-bottom:10px;
+}
+
+.welcome-card h3{
+  margin:0 0 8px;
+}
+
+.welcome-card p{
+  margin:0;
+}
   </style>
 </head>
 <body>
@@ -580,13 +614,43 @@ cursor: pointer;
         </div>
       </div>
     </section>
-    WELCOME TO BALLYBRACKAN
+<section id="welcome">
+  <h2 class="section-title">☘️ Welcome to Ballybrackan</h2>
 
-Population: Questionable
-Footballs Missing: 17
-Suspicious Seagulls: 43
-Known Mysteries: 12
-Harbour Incidents This Week: 7
+  <div class="welcome-grid">
+
+    <div class="welcome-card">
+      <span class="welcome-number">?</span>
+      <h3>Population</h3>
+      <p>Questionable</p>
+    </div>
+
+    <div class="welcome-card">
+      <span class="welcome-number">17</span>
+      <h3>Footballs Missing</h3>
+      <p>Still under investigation</p>
+    </div>
+
+    <div class="welcome-card">
+      <span class="welcome-number">43</span>
+      <h3>Suspicious Seagulls</h3>
+      <p>Known troublemakers</p>
+    </div>
+
+    <div class="welcome-card">
+      <span class="welcome-number">12</span>
+      <h3>Known Mysteries</h3>
+      <p>Officially acknowledged</p>
+    </div>
+
+    <div class="welcome-card">
+      <span class="welcome-number">7</span>
+      <h3>Harbour Incidents</h3>
+      <p>This week alone</p>
+    </div>
+
+  </div>
+</section>
 <section>
   <h2 class="section-title">Explore Ballybrackan</h2>
 
